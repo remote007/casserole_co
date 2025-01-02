@@ -1,5 +1,5 @@
 export function loadNavbar() {
-  fetch('../includes/navbar.html')
+  fetch('includes/navbar.html')
       .then(response => response.text())
       .then(navbarHTML => {
           document.getElementById('navbar-container').innerHTML=navbarHTML;
