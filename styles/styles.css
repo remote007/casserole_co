@@ -187,7 +187,7 @@ html, body {
 }
 
 /* Button Styling */
-.add-to-order-btn {
+.add-to-cart-btn {
     display: inline-block;
     background-color: #b97f59; /* Warm brown button color */
     color: #ffffff; /* White text color */
@@ -200,13 +200,13 @@ html, body {
 }
 
 /* Button Hover Effect */
-.add-to-order-btn:hover {
+.add-to-cart-btn:hover {
     background-color: #5c4033; /* Darker brown on hover */
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 /* Button Active Effect */
-.add-to-order-btn:active {
+.add-to-cart-btn:active {
     transform: scale(0.95); /* Slightly shrink on click */
 }
 

@@ -37,11 +37,11 @@ export async function loadMenu() {
 
             card.appendChild(menu_desc);
 
-            // Create and append "Add to Order" button
+            // Create and append "Add to Cart" button
             const button = document.createElement('button');
-            button.textContent = 'Add to Order';
-            button.classList.add('add-to-order-btn');
-            button.onclick = () => addToOrder(item);
+            button.textContent = 'Add to Cart';
+            button.classList.add('add-to-cart-btn');
+            button.onclick = () => addToCart(item);
             card.appendChild(button);
 
             // Append card to content container
@@ -56,7 +56,7 @@ export async function loadMenu() {
 }
 
 // Handle adding item to order
-function addToOrder(item) {
+function addToCart(item) {
     alert(`${item.name} has been added to your order!`);
     // Extend this function to update a shopping cart or order summary
 }
