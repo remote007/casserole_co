@@ -6,7 +6,7 @@ html, body {
     height: 100%; /* Ensures the body takes full height */
     margin: 0;    /* Remove default margin */
     padding: 0;   /* Remove default padding */
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial';
 }
 
 #app {
@@ -185,3 +185,28 @@ html, body {
         grid-template-columns: 1fr; /* Stacks the cards on small screens */
     }
 }
+
+/* Button Styling */
+.add-to-order-btn {
+    display: inline-block;
+    background-color: #b97f59; /* Warm brown button color */
+    color: #ffffff; /* White text color */
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Hover Effect */
+.add-to-order-btn:hover {
+    background-color: #5c4033; /* Darker brown on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Button Active Effect */
+.add-to-order-btn:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
