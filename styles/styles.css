@@ -1,0 +1,187 @@
+/* Basic styling */
+html, body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%; /* Ensures the body takes full height */
+    margin: 0;    /* Remove default margin */
+    padding: 0;   /* Remove default padding */
+    font-family: 'Arial', sans-serif;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.content {
+    flex: 1; /* Makes sure content grows to take up available space */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #f8f1e1;
+    color: #5c4033;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-family:'Lucida Sans';
+    box-shadow: 0 8px 20px rgba(185, 127, 89, 0.7);
+    border-bottom: 4px solid #b97f59; 
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.navbar .logo a {
+    color: #5c4033;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+
+.navbar .nav-links li a {
+    color: #5c4033;
+    text-decoration: none;
+}
+
+.navbar .nav-links li:hover {
+    color: #4a2207; /* A warmer, deeper shade of brown/orange (same as footer) */
+    transform: scale(1.15); /* Slightly scale the link on hover */
+}
+
+/* Menu Grid Layout */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Automatically adjusts based on screen size */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Menu Cards */
+.menu-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.menu-card:hover {
+    box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); /* Neon glow effect */
+    transform: scale(1.05); /* Slight scale effect to make the card pop */
+    transition: transform 0.3s ease, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Image Styling */
+.menu-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    border-bottom: 2px solid #f4f4f4;
+}
+
+/* Menu Details Styling */
+.menu-details {
+    height: 80%;
+    padding: 10px;
+}
+
+.menu-card h3 {
+    color: #5c4033; /* Warm brown color for title */
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.menu-card p {
+    font-size: 1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.menu-card strong {
+    font-size: 1.2em;
+    color: #000;
+}
+
+/* Footer Styling */
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f1e1; /* Light warm footer background */
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #5c4033; /* Same warm brown for footer text */
+    margin-top: 20px;
+    box-shadow: 0 -8px 20px rgba(185, 127, 89, 0.7);
+    border-top: 4px solid #b97f59; 
+}
+
+.footer-content > ul{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+
+.footer-content > ul > li {
+    list-style: none;
+}
+
+.footer-content > ul > li > a {
+    text-decoration: none;
+}
+
+.footer-content > p{
+    padding-top: 3px;
+    margin-top: 3px;
+}
+/* Responsive Design for Mobile and Tablets */
+@media (max-width: 768px) {
+    .menu-card {
+        padding: 10px;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjusts for smaller screen sizes */
+    }
+
+    .menu-image {
+        height: 180px; /* Adjusting image height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr; /* Stacks the cards on small screens */
+    }
+}
