@@ -1,5 +1,5 @@
 export function loadFooter() {
-    fetch('/includes/footer.html')
+    fetch('includes/footer.html')
         .then(response => response.text())
         .then(footerHTML => {
             document.getElementById('footer-div').innerHTML=footerHTML;
