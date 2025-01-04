@@ -1,0 +1,136 @@
+/* General Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ff6347;
+}
+
+/* Auth Sections */
+.auth-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.auth-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
+}
+
+.auth-section input:focus {
+    border: 1px solid #ff6347;
+    outline: none;
+}
+
+.btn {
+    background-color: #ff6347;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e5533d;
+}
+
+/* Switch Text and Link */
+.switch-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.switch-link {
+    color: #ff6347;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.switch-link:hover {
+    color: #e5533d;
+}
+
+#login-section, #signup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#login-section p, #signup-section p {
+    font-size: 0.9em;
+    color: #5c4033;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.modal-content input, .modal-content button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.modal-content button {
+    background-color: #b97f59;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #5c4033;
+}
+
+body.modal-open {
+    overflow: hidden; /* Prevent scrolling */
+}

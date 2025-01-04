@@ -1,3 +1,6 @@
+import { auth } from './auth.js';
+
+
 export async function loadMenu() {
     try {
         const response = await fetch('https://casserolecoserver.glitch.me/menu');
@@ -57,8 +60,9 @@ export async function loadMenu() {
 
 // Handle adding item to order
 function addToCart(item) {
-    alert(`${item.name} has been added to your order!`);
-    // Extend this function to update a shopping cart or order summary
+    if (auth.isLoggedIn) {
+        alert(`${item.name} has been added to your order!`);
+    } else {
+        window.location.href = "login.html";
+    }
 }
-
-

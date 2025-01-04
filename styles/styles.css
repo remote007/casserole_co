@@ -144,6 +144,8 @@ html, body {
     margin-top: 20px;
     box-shadow: 0 -8px 20px rgba(185, 127, 89, 0.7);
     border-top: 4px solid #b97f59; 
+    position: relative; /* Default positioning */
+    bottom: 0;
 }
 
 .footer-content > ul{
