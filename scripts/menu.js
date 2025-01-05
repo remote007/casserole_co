@@ -1,5 +1,5 @@
 import { auth } from './auth.js';
-
+import cart from './cart.js';
 
 export async function loadMenu() {
     try {
@@ -61,6 +61,12 @@ export async function loadMenu() {
 // Handle adding item to order
 function addToCart(item) {
     if (auth.isLoggedIn) {
+        const data = {
+            id: item.id,
+            name: item.name,
+            price: parseFloat(item.price),
+        };
+        cart.addItem(data);
         alert(`${item.name} has been added to your order!`);
     } else {
         window.location.href = "login.html";

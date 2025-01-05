@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/billing.css">
+</head>
+<body>
+    <div class="main-container">
+        <div id="navbar-container"></div>
+        <div class="billing-container">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: <span id="cart-total">0.00</span></h3>
+            </div>
+            <button id="checkout-btn" class="btn">Checkout</button>
+        </div>
+    </div>
+    <script src="scripts/cart.js" type="module"></script>
+    <script src="scripts/billing.js" type="module"></script>
+</body>
+</html>
