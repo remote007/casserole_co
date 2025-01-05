@@ -1,7 +1,7 @@
 ![logo](https://github.com/user-attachments/assets/11dfb4ab-d636-4bec-9c07-f2751c8ad991)
 
 # Project Title : 
-Casserole Co
+Casserole Co.
 
 ## Project Description : 
 A platform to offer you platefull of fresh and delicious dishes at your doorstep.
