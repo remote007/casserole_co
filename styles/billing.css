@@ -27,11 +27,12 @@
     display: block;
     margin: 20px auto;
     padding: 10px;
-    background-color: #5cb85c;
+    background-color: #5c4033;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 180px;
 }
 
 .item-table{
@@ -42,10 +43,16 @@
     width: 130px;
     background-color: #f8f1e1;
     color: #5c4033;
+    text-align: center;
 }
 
 .item-row-data{
     width: 130px;
     background-color: #f8f1e1;
     color: #5c4033;
+    text-align: center;
+}
+
+.quantity-input{
+    width: 60px;
 }
