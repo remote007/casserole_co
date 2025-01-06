@@ -57,11 +57,26 @@ html, body {
 }
 
 .navbar .nav-links li {
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    width: 190px;
+    margin-top: 15px;
     margin-left: 20px;
+    box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); 
+}
+
+#login_btn_id{
+    color: #5c4033;
+    text-decoration: none;
+    font-size: 20px;
+    border: none;
+    background-color: #f8f1e1;
 }
 
 .navbar .nav-links li a {
     color: #5c4033;
+    font-size: 20px;
     text-decoration: none;
 }
 
