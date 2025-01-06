@@ -45,10 +45,25 @@ html, body {
     flex-wrap: wrap;
 }
 
+.navbar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
+
 .navbar .logo a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: #5c4033;
     text-decoration: none;
     font-size: 30px;
+    margin: auto;
+    padding: auto;
 }
 
 .navbar .nav-links {
@@ -158,9 +173,12 @@ html, body {
 
 .footer-content > ul{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
     margin-bottom: 3px;
     padding-bottom: 3px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-content > ul > li {
@@ -218,3 +236,8 @@ html, body {
     transform: scale(0.95); /* Slightly shrink on click */
 }
 
+#logo-img-1{
+    width: 90px;
+    height: 90px;
+    margin-right: 40px;
+}
