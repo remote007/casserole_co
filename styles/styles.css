@@ -121,12 +121,6 @@ html, body {
     cursor: pointer;
 }
 
-.menu-card:hover {
-    box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); /* Neon glow effect */
-    transform: scale(1.05); /* Slight scale effect to make the card pop */
-    transition: transform 0.3s ease, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
-}
-
 .menu-image {
     width: 100%;
     height: 200px;
@@ -239,4 +233,15 @@ html, body {
     width: 90px;
     height: 90px;
     margin-right: 40px;
+}
+
+.menu-grid:hover .menu-card{
+    filter: blur(5px);
+}
+.menu-grid .menu-card:hover{
+filter: blur(0px);
+box-shadow: 0 12px 24px rgba(185, 127, 89, 0.8), 0 0 28px rgba(185, 127, 89, 0.6); /* Neon glow effect */
+transform: scale(1.05); /* Slight scale effect to make the card pop */
+transition: transform 0.3s ease, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+
 }
