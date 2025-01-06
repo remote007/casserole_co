@@ -2,9 +2,11 @@
     max-width: 800px;
     margin: auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f8f1e1;
+    color: #5c4033;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); 
+    text-align: center;
 }
 
 .cart-item {
@@ -30,4 +32,20 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.item-table{
+    width: 630px;
+}
+
+.item-row-heading{
+    width: 130px;
+    background-color: #f8f1e1;
+    color: #5c4033;
+}
+
+.item-row-data{
+    width: 130px;
+    background-color: #f8f1e1;
+    color: #5c4033;
 }
