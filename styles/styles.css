@@ -1,4 +1,4 @@
-/* Basic styling */
+
 html, body {
     display: flex;
     flex-direction: column;
@@ -27,7 +27,6 @@ html, body {
     gap: 30px;
 }
 
-/* Navbar Styling */
 .navbar {
     background-color: #f8f1e1;
     color: #5c4033;
@@ -71,7 +70,6 @@ html, body {
     transform: scale(1.15); /* Slightly scale the link on hover */
 }
 
-/* Menu Grid Layout */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Automatically adjusts based on screen size */
@@ -79,7 +77,6 @@ html, body {
     padding: 20px;
 }
 
-/* Individual Menu Cards */
 .menu-card {
     background-color: #fff;
     border-radius: 8px;
@@ -100,7 +97,6 @@ html, body {
     transition: transform 0.3s ease, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
-/* Image Styling */
 .menu-image {
     width: 100%;
     height: 200px;
@@ -108,7 +104,6 @@ html, body {
     border-bottom: 2px solid #f4f4f4;
 }
 
-/* Menu Details Styling */
 .menu-details {
     height: 80%;
     padding: 10px;
@@ -130,8 +125,6 @@ html, body {
     font-size: 1.2em;
     color: #000;
 }
-
-/* Footer Styling */
 
 .footer-content {
     display: flex;
@@ -167,7 +160,7 @@ html, body {
     padding-top: 3px;
     margin-top: 3px;
 }
-/* Responsive Design for Mobile and Tablets */
+
 @media (max-width: 768px) {
     .menu-card {
         padding: 10px;
@@ -188,7 +181,7 @@ html, body {
     }
 }
 
-/* Button Styling */
+
 .add-to-cart-btn {
     display: inline-block;
     background-color: #b97f59; /* Warm brown button color */
@@ -201,13 +194,11 @@ html, body {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Button Hover Effect */
 .add-to-cart-btn:hover {
     background-color: #5c4033; /* Darker brown on hover */
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-/* Button Active Effect */
 .add-to-cart-btn:active {
     transform: scale(0.95); /* Slightly shrink on click */
 }
