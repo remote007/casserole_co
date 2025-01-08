@@ -3,9 +3,9 @@ html, body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 100%; /* Ensures the body takes full height */
-    margin: 0;    /* Remove default margin */
-    padding: 0;   /* Remove default padding */
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Arial';
 }
 
@@ -20,7 +20,7 @@ html, body {
 }
 
 .content {
-    flex: 1; /* Makes sure content grows to take up available space */
+    flex: 1;
     padding: 20px;
     justify-content: center;
     align-items: center;
@@ -96,13 +96,13 @@ html, body {
 }
 
 .navbar .nav-links li:hover {
-    color: #4a2207; /* A warmer, deeper shade of brown/orange (same as footer) */
-    transform: scale(1.15); /* Slightly scale the link on hover */
+    color: #4a2207;
+    transform: scale(1.15);
 }
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Automatically adjusts based on screen size */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -124,7 +124,7 @@ html, body {
 .menu-image {
     width: 100%;
     height: 200px;
-    object-fit: cover; /* Ensures image covers the area without distortion */
+    object-fit: cover;
     border-bottom: 2px solid #f4f4f4;
 }
 
@@ -134,7 +134,7 @@ html, body {
 }
 
 .menu-card h3 {
-    color: #5c4033; /* Warm brown color for title */
+    color: #5c4033;
     font-size: 1.4em;
     margin-bottom: 15px;
 }
@@ -153,15 +153,15 @@ html, body {
 .footer-content {
     display: flex;
     flex-direction: column;
-    background-color: #f8f1e1; /* Light warm footer background */
+    background-color: #f8f1e1;
     padding: 20px;
     text-align: center;
     font-size: 1.1em;
-    color: #5c4033; /* Same warm brown for footer text */
+    color: #5c4033;
     margin-top: 20px;
     box-shadow: 0 -8px 20px rgba(185, 127, 89, 0.7);
     border-top: 4px solid #b97f59; 
-    position: relative; /* Default positioning */
+    position: relative;
     bottom: 0;
 }
 
@@ -194,24 +194,24 @@ html, body {
     }
 
     .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjusts for smaller screen sizes */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }
 
     .menu-image {
-        height: 180px; /* Adjusting image height for smaller screens */
+        height: 180px; 
     }
 }
 
 @media (max-width: 480px) {
     .menu-grid {
-        grid-template-columns: 1fr; /* Stacks the cards on small screens */
+        grid-template-columns: 1fr;
     }
 }
 
 .add-to-cart-btn {
     display: inline-block;
-    background-color: #b97f59; /* Warm brown button color */
-    color: #ffffff; /* White text color */
+    background-color: #b97f59;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
@@ -221,12 +221,12 @@ html, body {
 }
 
 .add-to-cart-btn:hover {
-    background-color: #5c4033; /* Darker brown on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #5c4033;
+    transform: scale(1.05);
 }
 
 .add-to-cart-btn:active {
-    transform: scale(0.95); /* Slightly shrink on click */
+    transform: scale(0.95);
 }
 
 #logo-img-1{
@@ -238,10 +238,11 @@ html, body {
 .menu-grid:hover .menu-card{
     filter: blur(5px);
 }
+
 .menu-grid .menu-card:hover{
-filter: blur(0px);
-box-shadow: 0 12px 24px rgba(185, 127, 89, 0.8), 0 0 28px rgba(185, 127, 89, 0.6); /* Neon glow effect */
-transform: scale(1.05); /* Slight scale effect to make the card pop */
-transition: transform 0.3s ease, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+    filter: blur(0px);
+    box-shadow: 0 12px 24px rgba(185, 127, 89, 0.8), 0 0 28px rgba(185, 127, 89, 0.6);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
 
 }
