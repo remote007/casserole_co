@@ -15,7 +15,7 @@ JavaScript
 
 #### Home Page
 Customer lands on homepage of the website and views dishes available .
-<img width="1440" alt="Screenshot 2025-01-05 at 10 31 54 PM" src="https://github.com/user-attachments/assets/a9bb1b6f-ce0c-4f42-b1d8-d916c550b906" />
+<img width="1440" alt="Screenshot 2025-01-08 at 11 12 08 AM" src="https://github.com/user-attachments/assets/373a5ccc-9720-46e4-ba1b-1b39f9957dc0" />
 
 #### Hover over menu card
 Menu card on hover glows with neon box shadow , zooms in and other cards get blurred.
