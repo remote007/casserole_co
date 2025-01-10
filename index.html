@@ -52,27 +52,37 @@
             </section> 
         <br><br>  
             <section class="testimonials">
-                <h2>What Our Customers Say</h2>
-                <div class="testimonial-slider">
-                    <div class="testimonial">
-                        <p>"Casserole Co. makes mealtime so easy and delicious!"</p>
-                        <span>- Sarah J.</span>
-                    </div>
-                    <div class="testimonial">
-                        <p>"The best delivery service I've ever used. Highly recommend!"</p>
-                        <span>- Mark R.</span>
-                    </div>
-                    <div class="testimonial">
-                        <p>"Amazing food and amazing service. Five stars!"</p>
-                        <span>- Emily T.</span>
-                    </div>
+            <h2>What Our Customers Say</h2>
+            <div class="carousel">
+                <!-- Testimonial Slides -->
+                <div class="carousel-slide active">
+                    <p>"The food is absolutely amazing! Fresh ingredients and perfect flavors."</p>
+                    <h4>- Sarah Johnson</h4>
                 </div>
-            </section>
+                <div class="carousel-slide">
+                    <p>"Casserole Co. made my life so much easier with their quick delivery and delicious meals."</p>
+                    <h4>- Mark Stevens</h4>
+                </div>
+                <div class="carousel-slide">
+                    <p>"A wide variety of dishes to choose from. I love the attention to quality."</p>
+                    <h4>- Emily Carter</h4>
+                </div>
+                <div class="carousel-slide">
+                    <p>"Their service is reliable, and the food is consistently excellent."</p>
+                    <h4>- David Lee</h4>
+                </div>
+            </div>
+        
+            <!-- Dots for Navigation -->
+            <div class="carousel-dots"></div>
+            </section>  
         <br><br>
-            <section class="cta">
-                <h2>Ready to Taste the Difference?</h2>
-                <p>Sign up today and enjoy your first meal on us!</p>
-                <a href="signup.html" class="btn-secondary">Get Started</a>
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to Taste the Difference?</h2>
+                    <p>Sign up today and enjoy your first meal on us!</p>
+                    <a href="signup.html" class="btn-cta">Get Started</a>
+                </div>
             </section>
        </div>
 
@@ -80,8 +90,8 @@
             
         </div>
     </div>
-
     <script src="./scripts/main.js" type="module"></script>
+    <script src="./scripts/carousel.js" type="module"></script>
 </body>
 
 </html>
