@@ -38,8 +38,8 @@
         console.log("here");
         if(localStorage.getItem('isLoggedIn') == null || localStorage.getItem('isLoggedIn') != 'true')
         {
-            alert("Please login to view cart");
             window.location.href = "login.html";
+            alert("Please login to view cart");
         }
     }
     window.document.onload = func();
