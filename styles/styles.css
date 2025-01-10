@@ -150,27 +150,35 @@ html, body {
     color: #000;
 }
 
+#footer-div{
+    top: 1;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    height:180px;
+    /* position:fixed; */
+}
+
 .footer-content {
     display: flex;
     flex-direction: column;
     background-color: #f8f1e1;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     font-size: 1.1em;
     color: #5c4033;
-    margin-top: 20px;
+    margin-top: 10px;
     box-shadow: 0 -8px 20px rgba(185, 127, 89, 0.7);
     border-top: 4px solid #b97f59; 
-    position: relative;
-    bottom: 0;
-    flex:1 
+    /* position: relative;
+    bottom: 0; */
 }
 
 .footer-content > ul{
     display: grid;
     grid-template-columns: repeat(6,1fr);
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -185,8 +193,8 @@ html, body {
 }
 
 .footer-content > p{
-    padding-top: 3px;
-    margin-top: 3px;
+    padding-top: 2px;
+    margin-top: 2px;
 }
 
 @media screen and (min-width:768px) and (max-width:1023px){
