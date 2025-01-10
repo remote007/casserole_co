@@ -371,37 +371,155 @@ html, body {
 /* Features Section */
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 3rem 2rem;
-    background: #f0efec;
+    grid-template-columns: repeat(2,1fr); /* 2 cards per row */
+    background: linear-gradient(to right, #d2b48c, #8b4513);
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin: 2rem 0;
+    width: 950px;
+    overflow: hidden; /* Ensure animations don't exceed section bounds */
 }
 
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Feature List Styling */
+.feature-list {
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-right: 20px;
+}
+
+/* Feature Cards */
 .feature {
-    text-align: center;
-    padding: 1rem;
-    background: rgba(224, 136, 92, 0.7);
+    background: linear-gradient(to bottom right, #fff, #ffe4b5);
+    color: #333;
     border-radius: 10px;
+    padding: 2rem;
+    max-width: 300px;
+    text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+    overflow: hidden;
+    position: relative;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(30px); /* Slide-in effect */
+    animation: slideIn 1s ease-in-out forwards;
+    margin: auto;
+    margin-bottom: 30px;
+    height: 270px;
+}
+
+.feature:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.feature:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.feature:nth-child(3) {
+    animation-delay: 0.6s;
 }
 
 .feature:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1); /* Subtle zoom-in effect */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom right, #ffe4b5, #ffd700);
 }
 
+/* Feature Icon Styling */
 .feature img {
-    width: 80px;
+    width: 190px;
+    height: 120px;
+    object-fit: contain;
     margin-bottom: 1rem;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #8b4513;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Keyframe Animations */
+
+/* Slide-in Effect */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse Effect for Icons */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+    }
+}
+
+/* Fade-in Effect for Section Title */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add subtle gradient overlay */
+.feature::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(210, 180, 140, 0.1), rgba(139, 69, 19, 0.2));
+    z-index: -1;
+    border-radius: 10px;
 }
 
 /* Testimonials */
 .testimonials {
-    background: linear-gradient(to right, #ff6347, #f76a2d);
+    background: linear-gradient(to right, #d2b48c, #8b4513);
     color: #fff;
     padding: 3rem 2rem;
     text-align: center;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .testimonial-slider {
