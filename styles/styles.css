@@ -511,34 +511,97 @@ html, body {
     border-radius: 10px;
 }
 
-/* Testimonials */
+/* Testimonials Section */
 .testimonials {
-    background: linear-gradient(to right, #d2b48c, #8b4513);
+    background: linear-gradient(to right, #f0c27b, #4b2e2a); /* Golden honey to hazelnut */
     color: #fff;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     text-align: center;
-    position: relative;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.testimonial-slider {
+.testimonials h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Carousel Container */
+.carousel {
     display: flex;
     gap: 2rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 }
 
+/* Testimonial Cards */
 .testimonial {
-    flex: 0 0 300px;
-    scroll-snap-align: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
+    min-width: 80%;
+    max-width: 600px;
+    background: linear-gradient(to bottom right, #fff, #ffe4b5); /* Light gradient for contrast */
+    color: #333;
+    padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
+/* Active Testimonial */
+.testimonial.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+/* Testimonial Text */
 .testimonial p {
-    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.8;
     margin-bottom: 1rem;
+    color: #8b4513;
+}
+
+.testimonial h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4b2e2a;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.carousel-button {
+    background: linear-gradient(to right, #f0c27b, #4b2e2a);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
