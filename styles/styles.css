@@ -331,7 +331,9 @@ html, body {
     background: linear-gradient(to right, #f2dcb7, #d99836);
     border: none;
     border-radius: 30px;
-    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
+    box-shadow: 0 0 10px rgba(233, 187, 4, 0.8), 
+                0 0 20px rgba(233, 187, 4, 0.8), 
+                0 0 30px rgba(233, 187, 4, 0.8);
     cursor: pointer;
     transition: all 0.4s ease;
     text-decoration: none;
@@ -423,7 +425,10 @@ html, body {
     padding: 2rem;
     max-width: 300px;
     text-align: center;
-    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
+    /* box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white; */
+    box-shadow: 0 0 10px rgba(233, 187, 4, 0.8), 
+                0 0 20px rgba(233, 187, 4, 0.8), 
+                0 0 30px rgba(233, 187, 4, 0.8);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
     overflow: hidden;
     position: relative;
@@ -616,7 +621,9 @@ html, body {
     background: linear-gradient(to right, #f5e1c0, #da9e45);
     border: none;
     border-radius: 30px;
-    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
+    box-shadow: 0 0 10px rgba(233, 187, 4, 0.8), 
+                0 0 20px rgba(233, 187, 4, 0.8), 
+                0 0 30px rgba(233, 187, 4, 0.8);
     cursor: pointer;
     transition: all 0.4s ease;
     text-decoration: none;
