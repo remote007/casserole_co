@@ -163,6 +163,7 @@ html, body {
     border-top: 4px solid #b97f59; 
     position: relative;
     bottom: 0;
+    flex:1 
 }
 
 .footer-content > ul{
