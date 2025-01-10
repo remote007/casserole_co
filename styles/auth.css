@@ -132,3 +132,7 @@
 body.modal-open {
     overflow: hidden; 
 }
+
+#log-div{
+    height: 450px;
+}
