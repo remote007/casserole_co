@@ -10,10 +10,10 @@ export function loadNavbar() {
             navAuthBtn.textContent = "Logout";
             navAuthBtn.href = '#';
             navAuthBtn.onclick = (e) => {
-                e.preventDefault(); // Prevent default anchor behavior
+                e.preventDefault();
                 auth.logout();
                 alert('You have been logged out.');
-                window.location.href = 'index.html'; // Redirect to homepage
+                window.location.href = 'index.html';
             };
         }
       })

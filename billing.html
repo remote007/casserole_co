@@ -31,5 +31,17 @@
     <script src="scripts/cart.js" type="module"></script>
     <script src="scripts/billing.js" type="module"></script>
     <script src="./scripts/main.js" type="module"></script>
+
 </body>
+<script>
+    function func(){
+        console.log("here");
+        if(localStorage.getItem('isLoggedIn') == null || localStorage.getItem('isLoggedIn') != 'true')
+        {
+            window.location.href = "login.html";
+            alert("Please login to view cart");
+        }
+    }
+    window.document.onload = func();
+</script>
 </html>
