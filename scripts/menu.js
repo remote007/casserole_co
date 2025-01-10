@@ -30,13 +30,17 @@ export async function loadMenu() {
 
             const price = document.createElement('p');
             price.textContent = "Price: ₹ "+item.price;
-            price.style["font-family"] = "Arial";
+            price.style["font-family"] = "sans-serif";
+            price.style["font-size"] = "medium";
+            price.style["color"] = "black";
             
              
             const menu_desc = document.createElement('div');
             menu_desc.classList.add('menu_description');
 
-            menu_desc.appendChild(title,description,price);
+            menu_desc.appendChild(title);
+            menu_desc.appendChild(description);
+            menu_desc.appendChild(price);
 
             card.appendChild(menu_desc);
 
