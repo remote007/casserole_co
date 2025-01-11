@@ -15,35 +15,30 @@ JavaScript
 
 #### Home Page
 Customer lands on homepage of the website and views dishes available .
-<img width="1440" alt="Screenshot 2025-01-08 at 11 12 08 AM" src="https://github.com/user-attachments/assets/373a5ccc-9720-46e4-ba1b-1b39f9957dc0" />
+<img width="1440" alt="home1" src="https://github.com/user-attachments/assets/e91794e1-2c44-4f71-85f3-20b30bfe4cc4" />
+<img width="1440" alt="home2" src="https://github.com/user-attachments/assets/a37a5fe3-fadf-4b3b-b382-a9679c867671" />
 
-#### Hover over menu card
+#### Menu card
 Menu card on hover glows with neon box shadow , zooms in and other cards get blurred.
-<img width="1440" alt="Screenshot 2025-01-08 at 11 00 06 AM" src="https://github.com/user-attachments/assets/88e65e42-45d5-4561-ba9d-26cbc003e245" />
-
-#### Hover over navbar button
-Navbar item on hover glows with neon box shadow , zooms in .
-<img width="1440" alt="Screenshot 2025-01-08 at 11 00 23 AM" src="https://github.com/user-attachments/assets/0b16976f-f612-47a4-8f45-496794784178" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 56 24 PM" src="https://github.com/user-attachments/assets/c60c4501-743d-4259-958b-cd0bb26ccdd8" />
+###### Hover over Menu card
+<img width="1440" alt="Screenshot 2025-01-11 at 2 50 50 PM" src="https://github.com/user-attachments/assets/fcdd3f31-3a6c-477c-8a8d-660596a6fba3" />
 
 #### Responsive Styling
-
-<img width="1440" alt="Screenshot 2025-01-08 at 10 54 59 AM" src="https://github.com/user-attachments/assets/73099913-4357-4917-8a20-a7afe85ba77b" />
-
-<img width="1440" alt="Screenshot 2025-01-08 at 10 54 52 AM" src="https://github.com/user-attachments/assets/e301c940-70d9-474f-840e-a8c186305cf0" />
-
-<img width="1440" alt="Screenshot 2025-01-08 at 10 55 44 AM" src="https://github.com/user-attachments/assets/952786cd-19aa-41c5-97d0-8e305fba276a" />
-
+<img width="1440" alt="Screenshot 2025-01-11 at 2 58 11 PM" src="https://github.com/user-attachments/assets/3ca687d9-f185-4b74-bbf7-404374442f44" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 58 52 PM" src="https://github.com/user-attachments/assets/ae34c5d1-430b-4c3c-91fd-74ad533b154b" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 59 16 PM" src="https://github.com/user-attachments/assets/3a617b26-3e2f-42d8-a2da-446ae415b4f2" />
 
 #### Sign up and Login
 User is asked to login or signup depending upon their requirement of placing an order. They get the authority to place an order and modify the cart after login.
-<img width="1440" alt="Screenshot 2025-01-08 at 10 58 20 AM" src="https://github.com/user-attachments/assets/9abd6df5-323b-4a48-8d82-646bd8dc7613" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 53 02 PM" src="https://github.com/user-attachments/assets/268d4df3-cade-4ff6-a1c4-ed643483a1f0" />
 
-<img width="1440" alt="Screenshot 2025-01-08 at 10 58 14 AM" src="https://github.com/user-attachments/assets/e44ae53d-7f49-416b-89b4-0a763584cad9" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 51 03 PM" src="https://github.com/user-attachments/assets/0022af14-827f-4519-9ddf-96078669fda6" />
 
 
 #### Cart page
 After the user adds the dishes to order, the user can view the cart page to place / modify the order.
-<img width="1440" alt="Screenshot 2025-01-07 at 11 12 04 AM" src="https://github.com/user-attachments/assets/4673d371-4b53-402e-a739-761ea9841fae" />
+<img width="1440" alt="Screenshot 2025-01-11 at 2 52 02 PM" src="https://github.com/user-attachments/assets/133332d5-14d7-4c14-9855-a29f1d850792" />
 
 
 ### How to Install and Run the Project : 
