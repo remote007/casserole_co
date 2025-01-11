@@ -57,7 +57,7 @@ const billing = (() => {
         // Retrieve user data from sessionStorage
         const userSession = sessionStorage.getItem('user');
         if (!userSession) {
-            alert('No user is logged in. Redirecting to login.');
+            alert('Login to view cart is logged in. Redirecting to login.');
             window.location.href = 'login.html';
             return;
         }

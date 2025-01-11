@@ -13,7 +13,7 @@ const cart = (() => {
 
             const userSession = sessionStorage.getItem('user');
             if (!userSession) {
-                alert('No user is logged in.');
+                alert('Login to view cart is logged in.');
                 return [];
             }
 
@@ -34,7 +34,7 @@ const cart = (() => {
         try {
             const userSession = sessionStorage.getItem('user');
             if (!userSession) {
-                alert('No user is logged in.');
+                alert('Login to view cart is logged in.');
                 return;
             }
 
