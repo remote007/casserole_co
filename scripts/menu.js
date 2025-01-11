@@ -65,15 +65,68 @@ export async function loadMenu() {
 }
 
 // Handle adding item to order
-function addToCart(item) {
-    if (auth.isLoggedIn) {
+async function addToCart(item) {
+    if (auth.isLoggedIn()) {
         const data = {
             id: item.id,
             name: item.name,
             price: parseFloat(item.price),
+            quantity: 1,  // Assuming quantity is 1 by default
         };
+
+        // Add item to the local cart (client-side)
         cart.addItem(data);
-        alert(`${item.name} has been added to your order!`);
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        const userEmail = user.username;
+        // Check if the user has a cart on the server
+        try {
+            const cartResponse = await fetch(`https://casserolecoserver.glitch.me/cart?username=${userEmail}`);
+            const existingCart = await cartResponse.json();
+
+            if (existingCart && existingCart.length > 0) {
+                // Cart exists, update it
+                const cartId = existingCart[0].id;
+
+                const updateResponse = await fetch(`https://casserolecoserver.glitch.me/cart/${cartId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id : cartId,
+                        username: userEmail,
+                        order: [...existingCart[0].order, { id: item.id, quantity: 1 }] // Update with new item
+                    }),
+                });
+
+                if (updateResponse.ok) {
+                    alert(`${item.name} has been added to your order!`);
+                } else {
+                    alert('Failed to update the cart. Please try again.');
+                }
+            } else {
+                // Cart does not exist, create a new one
+                const createResponse = await fetch('https://casserolecoserver.glitch.me/cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: userEmail,
+                        order: [{ id: item.id, quantity: 1 }]
+                    })
+                });
+
+                if (createResponse.ok) {
+                    alert(`${item.name} has been added to your order!`);
+                } else {
+                    alert('Failed to create cart. Please try again.');
+                }
+            }
+        } catch (error) {
+            console.error('Error checking or updating cart:', error);
+            alert('An error occurred while adding the item to the cart.');
+        }
     } else {
         window.location.href = "login.html";
     }

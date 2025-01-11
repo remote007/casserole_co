@@ -1,7 +1,6 @@
 import { auth } from './auth.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    
+document.addEventListener('DOMContentLoaded', async () => {
     const modal = document.getElementById('auth-modal');
     const closeModal = document.querySelector('.close-modal');
     const loginForm = document.getElementById('login-form');
@@ -11,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSignup = document.getElementById('show-signup');
     const showLogin = document.getElementById('show-login');
 
-    // Automatically open modal on page load for login.html
     if (modal) {
-        if(auth.isLoggedIn)
-        {
+        if (await auth.isLoggedIn()) {
             alert("Already Logged In");
             window.location.href = "index.html";
+            return;
         }
+
         const openModal = () => {
             modal.style.display = 'flex';
             document.body.classList.add('modal-open');
@@ -29,56 +28,45 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         };
 
-        // Open the modal on page load
         openModal();
-
-        // Close modal
         closeModal.addEventListener('click', closeAndRedirect);
 
-        // Switch to Signup
         showSignup.addEventListener('click', () => {
             loginSection.style.display = 'none';
             signupSection.style.display = 'block';
         });
 
-        // Switch to Login
         showLogin.addEventListener('click', () => {
             signupSection.style.display = 'none';
             loginSection.style.display = 'block';
         });
 
-        // Handle Login
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
 
-            if (username && password) {
-                auth.login(username);
-                alert(`Welcome back, ${username}!`);
+            try {
+                const user = await auth.login(username, password);
+                alert(`Welcome back, ${user.username}!`);
                 closeAndRedirect();
-                updateNavbarAuthButton();
-            } else {
-                alert('Please enter valid credentials.');
+            } catch (error) {
+                alert(error.message);
             }
         });
 
-        // Handle Signup
-        signupForm.addEventListener('submit', (e) => {
+        signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('signup-username').value;
             const password = document.getElementById('signup-password').value;
 
-            if (username && password) {
-                auth.login(username);
+            try {
+                await auth.signup(username, password);
                 alert(`Account created for ${username}!`);
                 closeAndRedirect();
-                updateNavbarAuthButton();
-            } else {
-                alert('Please enter all required fields.');
+            } catch (error) {
+                alert(error.message);
             }
         });
     }
 });
-
-
