@@ -565,8 +565,15 @@ html, body {
     border-radius: 10px;
 }
 
+#intro_div_sec{
+    display: grid;
+    grid-template-columns: repeat(2,1fr) ;
+}
+
 /* Testimonial Section */
 .testimonials {
+    height: 310px;
+    width: 630px;
     text-align: center;
     padding: 50px;
     background: linear-gradient(to bottom right, #f2dcb7, #d99836);
@@ -627,13 +634,15 @@ html, body {
 
 /* CTA Section */
 .cta-section {
-    height: 210px;
-    padding: 80px 20px;
+    height: 430px;
+    width: 630px;
+    margin-left: 10px;
+    /* padding: 80px 20px; */
     text-align: center;
     background: linear-gradient(to bottom right, #f5e1c0, #9e6c20);
     color: #4b3e2b;
     box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
-    margin-bottom: 40px;
+    transition: all 0.4s ease;
 }
 
 .cta-section h2 {
