@@ -4,7 +4,7 @@ export function loadNavbar() {
       .then(response => response.text())
       .then(navbarHTML => {
         document.getElementById('navbar-container').innerHTML=navbarHTML;
-        if(sessionStorage.length>1)
+        if(sessionStorage.getItem('user')!=null)
         { 
             const navAuthBtn = document.getElementById('login_btn_id');
             navAuthBtn.textContent = "Logout";
