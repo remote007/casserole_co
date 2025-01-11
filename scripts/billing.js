@@ -9,11 +9,10 @@ const renderCart = () => {
         <div class="cart-item">
             <table class="item-table">
                 <tr class="item-row">
-                    <td class="item-row-data"><span>${item.name}</span></th>
-                    <td class="item-row-data"><span><input type="number" class="quantity-input" data-id="${item.id}" value="${item.quantity}" min="1"></span></th>
-                    <td class="item-row-data"><span>₹ ${(item.price * item.quantity).toFixed(2)}</span></th>
-                    <td class="item-row-data"><button class="remove-btn" data-id="${item.id}">Remove</button></th>
-                </tr>
+                    <td class="item-row-data"><span>${item.name}</span></td>
+                    <td class="item-row-data"><span><input type="number" class="quantity-input" data-id="${item.id}" value="${item.quantity}" min="0"></span></td>
+                    <td class="item-row-data"><span>₹ ${(item.price * item.quantity).toFixed(2)}</span></td>
+                   </tr>
             </table>
         </div>
     `).join('');
@@ -22,7 +21,7 @@ const renderCart = () => {
 
     document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('change', () => {
-            const itemId = input.dataset.id;
+            const itemId = parseInt(input.dataset.id);
             const quantity = parseInt(input.value);
             cart.updateItem(itemId, quantity);
             renderCart();
@@ -31,7 +30,7 @@ const renderCart = () => {
 
     document.querySelectorAll('.remove-btn').forEach(button => {
         button.addEventListener('click', () => {
-            const itemId = button.dataset.id;
+            const itemId = parseInt(button.dataset.id);
             cart.removeItem(itemId);
             renderCart();
         });

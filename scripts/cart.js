@@ -1,5 +1,4 @@
 const cart = (() => {
-
     const CART_KEY = 'cart';
 
     const saveCart = (items) => localStorage.setItem(CART_KEY, JSON.stringify(items));
@@ -19,8 +18,14 @@ const cart = (() => {
 
         updateItem(itemId, quantity) {
             const cartItems = loadCart();
-            const item = cartItems.find(cartItem => cartItem.id === itemId);
-            if (item) item.quantity = quantity;
+            const itemIndex = cartItems.findIndex(cartItem => cartItem.id === itemId);
+            if (itemIndex !== -1) {
+                if (quantity > 0) {
+                    cartItems[itemIndex].quantity = quantity;
+                } else {
+                    cartItems.splice(itemIndex, 1); // Remove item if quantity is 0
+                }
+            }
             saveCart(cartItems);
         },
 
