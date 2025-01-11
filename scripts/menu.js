@@ -119,6 +119,17 @@ export async function loadMenu() {
         // Initial render
         renderMenu(menu);
 
+        sortDropdown.addEventListener('change', () => {
+            const sortValue = sortDropdown.value;
+            const sortedMenu = [...menu];
+            if (sortValue === 'asc') {
+                sortedMenu.sort((a, b) => a.price - b.price);
+            } else if (sortValue === 'desc') {
+                sortedMenu.sort((a, b) => b.price - a.price);
+            }
+            renderMenu(sortedMenu);
+        });
+
         // Handle search input
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase();
