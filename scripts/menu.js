@@ -32,6 +32,12 @@ export async function loadMenu() {
         sortDropdown.appendChild(descOption);
 
         sortContainer.appendChild(sortDropdown);
+        sortContainer.style['width'] = '120px';
+        sortContainer.style['text-align'] =  'center';
+        sortContainer.style['justify-content'] =  'center';
+        sortContainer.style['margin-right'] = '0px';
+        sortContainer.style['padding-right'] = '0px';
+        sortContainer.style['margin'] = 'auto';
         firstContainer.appendChild(sortContainer)
         // contentContainer.appendChild(sortContainer);
 
@@ -45,10 +51,14 @@ export async function loadMenu() {
 
         searchContainer.appendChild(searchInput);
         searchContainer.style['width'] = '320px';
+        searchContainer.style['margin-left'] = '0px';
+        searchContainer.style['padding-left'] = '0px';
         firstContainer.appendChild(searchContainer);
         firstContainer.style['display'] = 'grid';
         firstContainer.style['grid-template-columns'] = 'repeat(2,1fr)' ;
-        
+        firstContainer.style['margin'] = 'auto';
+        sortContainer.style['justify-content'] =  'left';
+
         contentContainer.appendChild(firstContainer);
 
         const grid = document.createElement('div');
