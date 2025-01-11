@@ -55,19 +55,29 @@ export async function loadMenu() {
         searchContainer.style['padding-left'] = '0px';
         firstContainer.appendChild(searchContainer);
         firstContainer.style['display'] = 'grid';
-        firstContainer.style['grid-template-columns'] = 'repeat(2,1fr)' ;
+        firstContainer.style['grid-template-columns'] = 'repeat(3,1fr)' ;
         firstContainer.style['margin'] = 'auto';
         sortContainer.style['justify-content'] =  'left';
 
+        const itemsPerPage = 10; // Number of items per page
+        let currentPage = 1;
+
+        const paginationContainer = document.createElement('div');
+        paginationContainer.classList.add('pagination-container');
+        firstContainer.appendChild(paginationContainer);
         contentContainer.appendChild(firstContainer);
 
         const grid = document.createElement('div');
         grid.classList.add('menu-grid');
         contentContainer.appendChild(grid);
 
-        function renderMenu(menuItems) {
+        function renderMenu(menuItems, page = 1) {
             grid.innerHTML = ''; // Clear existing menu
-            menuItems.forEach(item => {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = page * itemsPerPage;
+            const itemsToShow = menuItems.slice(startIndex, endIndex);
+
+            itemsToShow.forEach(item => {
                 // Create card container
                 const card = document.createElement('div');
                 card.classList.add('menu-card');
@@ -114,6 +124,48 @@ export async function loadMenu() {
                 // Append card to content container
                 grid.appendChild(card);
             });
+
+            renderPagination(menuItems, page);
+        }
+
+
+        function renderPagination(menuItems, currentPage) {
+            paginationContainer.innerHTML = ''; // Clear existing pagination
+
+            const totalPages = Math.ceil(menuItems.length / itemsPerPage);
+
+            // Previous button
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.disabled = currentPage === 1;
+            prevButton.onclick = () => {
+                renderMenu(menuItems, currentPage - 1);
+            };
+            paginationContainer.appendChild(prevButton);
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.classList.add('page-button');
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.onclick = () => {
+                    renderMenu(menuItems, i);
+                };
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.onclick = () => {
+                renderMenu(menuItems, currentPage + 1);
+            };
+            paginationContainer.appendChild(nextButton);
+
         }
 
         // Initial render

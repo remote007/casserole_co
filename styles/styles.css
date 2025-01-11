@@ -695,6 +695,7 @@ html, body {
     margin: 10px 0;
     text-align: center;
 }
+
 .sort-dropdown {
     padding: 5px 10px;
     font-size: 16px;
@@ -705,6 +706,7 @@ html, body {
     margin: 10px 0;
     text-align: center;
 }
+
 .search-input {
     width: 80%;
     padding: 8px 10px;
@@ -712,7 +714,35 @@ html, body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .search-input:focus {
     outline: none;
     border-color: #ff9800;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.pagination-container button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.pagination-container button.active {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+}
+
+.pagination-container button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
