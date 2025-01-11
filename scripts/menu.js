@@ -1,70 +1,179 @@
 import { auth } from './auth.js';
 import cart from './cart.js';
 
+// export async function loadMenu() {
+//     try {
+//         const response = await fetch('https://casserolecoserver.glitch.me/menu');
+//         const menu = await response.json();
+
+//         const grid = document.createElement('div');
+//         grid.classList.add('menu-grid');
+//         menu.forEach(item => {
+//             // Create card container
+//             const card = document.createElement('div');
+//             card.classList.add('menu-card');
+
+//             // Create and append image
+//             const image = document.createElement('img');
+//             image.src = `img/${item.imageUrl}`;
+//             image.alt = item.name;
+//             image.classList.add('menu-image');
+//             card.appendChild(image);
+
+//             // Create and append title
+//             const title = document.createElement('h3');
+//             title.style["text-shadow"] = "0 0 4px rgba(233, 187, 4, 0.8), 0 0 7px rgba(233, 187, 4, 0.8), 0 0 9px rgba(233, 187, 4, 0.8)";
+//             title.textContent = item.name;
+
+//             // Create and append description
+//             const description = document.createElement('p');
+//             description.textContent = item.description;
+//             description.style["font-size"] = "small";
+
+//             const price = document.createElement('p');
+//             price.textContent = "Price: ₹ "+item.price;
+//             price.style["font-family"] = "sans-serif";
+//             price.style["font-size"] = "medium";
+//             price.style["color"] = "black";
+            
+             
+//             const menu_desc = document.createElement('div');
+//             menu_desc.classList.add('menu_description');
+
+//             menu_desc.appendChild(title);
+//             menu_desc.appendChild(description);
+//             menu_desc.appendChild(price);
+
+//             card.appendChild(menu_desc);
+
+//             // Create and append "Add to Cart" button
+//             const button = document.createElement('button');
+//             button.textContent = 'Add to Cart';
+//             button.classList.add('add-to-cart-btn');
+//             button.onclick = () => addToCart(item);
+//             card.appendChild(button);
+
+//             // Append card to content container
+//             grid.appendChild(card);
+//         });
+//         const contentContainer = document.querySelector('.content');
+//         contentContainer.innerHTML = ''; // Clear any existing content
+//         contentContainer.appendChild(grid);
+//     } catch (error) {
+//         console.error('Error fetching menu:', error);
+//     }
+// }
+
+// Handle adding item to order
+
 export async function loadMenu() {
     try {
         const response = await fetch('https://casserolecoserver.glitch.me/menu');
-        const menu = await response.json();
+        let menu = await response.json();
+
+        const contentContainer = document.querySelector('.content');
+        contentContainer.innerHTML = ''; // Clear any existing content
+
+        // Add sorting dropdown
+        const sortContainer = document.createElement('div');
+        sortContainer.classList.add('sort-container');
+        const sortDropdown = document.createElement('select');
+        sortDropdown.classList.add('sort-dropdown');
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Sort by Price';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+
+        const ascOption = document.createElement('option');
+        ascOption.value = 'asc';
+        ascOption.textContent = 'Price: Low to High';
+
+        const descOption = document.createElement('option');
+        descOption.value = 'desc';
+        descOption.textContent = 'Price: High to Low';
+
+        sortDropdown.appendChild(defaultOption);
+        sortDropdown.appendChild(ascOption);
+        sortDropdown.appendChild(descOption);
+
+        sortContainer.appendChild(sortDropdown);
+        contentContainer.appendChild(sortContainer);
 
         const grid = document.createElement('div');
         grid.classList.add('menu-grid');
-        menu.forEach(item => {
-            // Create card container
-            const card = document.createElement('div');
-            card.classList.add('menu-card');
-
-            // Create and append image
-            const image = document.createElement('img');
-            image.src = `img/${item.imageUrl}`;
-            image.alt = item.name;
-            image.classList.add('menu-image');
-            card.appendChild(image);
-
-            // Create and append title
-            const title = document.createElement('h3');
-            title.style["text-shadow"] = "0 0 4px rgba(233, 187, 4, 0.8), 0 0 7px rgba(233, 187, 4, 0.8), 0 0 9px rgba(233, 187, 4, 0.8)";
-            title.textContent = item.name;
-
-            // Create and append description
-            const description = document.createElement('p');
-            description.textContent = item.description;
-            description.style["font-size"] = "small";
-
-            const price = document.createElement('p');
-            price.textContent = "Price: ₹ "+item.price;
-            price.style["font-family"] = "sans-serif";
-            price.style["font-size"] = "medium";
-            price.style["color"] = "black";
-            
-             
-            const menu_desc = document.createElement('div');
-            menu_desc.classList.add('menu_description');
-
-            menu_desc.appendChild(title);
-            menu_desc.appendChild(description);
-            menu_desc.appendChild(price);
-
-            card.appendChild(menu_desc);
-
-            // Create and append "Add to Cart" button
-            const button = document.createElement('button');
-            button.textContent = 'Add to Cart';
-            button.classList.add('add-to-cart-btn');
-            button.onclick = () => addToCart(item);
-            card.appendChild(button);
-
-            // Append card to content container
-            grid.appendChild(card);
-        });
-        const contentContainer = document.querySelector('.content');
-        contentContainer.innerHTML = ''; // Clear any existing content
         contentContainer.appendChild(grid);
+
+        function renderMenu(menuItems) {
+            grid.innerHTML = ''; // Clear existing menu
+            menuItems.forEach(item => {
+                // Create card container
+                const card = document.createElement('div');
+                card.classList.add('menu-card');
+
+                // Create and append image
+                const image = document.createElement('img');
+                image.src = `img/${item.imageUrl}`;
+                image.alt = item.name;
+                image.classList.add('menu-image');
+                card.appendChild(image);
+
+                // Create and append title
+                const title = document.createElement('h3');
+                title.style["text-shadow"] = "0 0 4px rgba(233, 187, 4, 0.8), 0 0 7px rgba(233, 187, 4, 0.8), 0 0 9px rgba(233, 187, 4, 0.8)";
+                title.textContent = item.name;
+
+                // Create and append description
+                const description = document.createElement('p');
+                description.textContent = item.description;
+                description.style["font-size"] = "small";
+
+                const price = document.createElement('p');
+                price.textContent = "Price: ₹ " + item.price;
+                price.style["font-family"] = "sans-serif";
+                price.style["font-size"] = "medium";
+                price.style["color"] = "black";
+
+                const menu_desc = document.createElement('div');
+                menu_desc.classList.add('menu_description');
+
+                menu_desc.appendChild(title);
+                menu_desc.appendChild(description);
+                menu_desc.appendChild(price);
+
+                card.appendChild(menu_desc);
+
+                // Create and append "Add to Cart" button
+                const button = document.createElement('button');
+                button.textContent = 'Add to Cart';
+                button.classList.add('add-to-cart-btn');
+                button.onclick = () => addToCart(item);
+                card.appendChild(button);
+
+                // Append card to content container
+                grid.appendChild(card);
+            });
+        }
+
+        // Initial render
+        renderMenu(menu);
+
+        // Handle sort changes
+        sortDropdown.addEventListener('change', () => {
+            const sortValue = sortDropdown.value;
+            const sortedMenu = [...menu];
+            if (sortValue === 'asc') {
+                sortedMenu.sort((a, b) => a.price - b.price);
+            } else if (sortValue === 'desc') {
+                sortedMenu.sort((a, b) => b.price - a.price);
+            }
+            renderMenu(sortedMenu);
+        });
     } catch (error) {
         console.error('Error fetching menu:', error);
     }
 }
 
-// Handle adding item to order
 async function addToCart(item) {
     if (auth.isLoggedIn()) {
         const data = {
