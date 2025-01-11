@@ -5,6 +5,12 @@ const renderCart = () => {
     const cartTotal = document.getElementById('cart-total');
     const items = cart.getItems();
 
+    if (items.length === 0) {
+        alert('Your cart is empty. Add dishes to proceed.');
+        window.location.href = 'menu.html';
+        return;
+    }
+
     cartItemsContainer.innerHTML = items.map(item => `
         <div class="cart-item">
             <table class="item-table">
@@ -28,13 +34,6 @@ const renderCart = () => {
         });
     });
 
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const itemId = parseInt(button.dataset.id);
-            cart.removeItem(itemId);
-            renderCart();
-        });
-    });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('checkout-btn').addEventListener('click', () => {
         alert('Order placed successfully!');
+        window.location.href = 'index.html';
         cart.clear();
-        renderCart();
     });
 });
