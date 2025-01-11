@@ -44,10 +44,13 @@ User is asked to login or signup depending upon their requirement of placing an 
 
 <img width="1440" alt="Screenshot 2025-01-11 at 2 51 03 PM" src="https://github.com/user-attachments/assets/0022af14-827f-4519-9ddf-96078669fda6" />
 
-
-#### Cart page
+#### Cart
 After the user adds the dishes to order, the user can view the cart page to place / modify the order.
 <img width="1440" alt="Screenshot 2025-01-11 at 2 52 02 PM" src="https://github.com/user-attachments/assets/133332d5-14d7-4c14-9855-a29f1d850792" />
+
+#### View Order
+View all the orders by user.
+<img width="1440" alt="Screenshot 2025-01-11 at 5 25 21 PM" src="https://github.com/user-attachments/assets/6c340c37-752a-4896-bb59-0b7233cfb1f3" />
 
 
 ### How to Install and Run the Project : 
