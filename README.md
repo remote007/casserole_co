@@ -6,6 +6,12 @@ Casserole Co.
 ## Project Description : 
 A platform to offer you platefull of fresh and delicious dishes at your doorstep.
 
+## Frontend Deployment : 
+https://casserole-co.netlify.app/
+
+## Backend Deployment : 
+https://casserolecoserver.glitch.me/
+
 ## Tech Stacks : 
 HTML
 CSS
