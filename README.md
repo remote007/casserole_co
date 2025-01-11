@@ -21,12 +21,15 @@ JavaScript
 
 #### Home Page
 Customer lands on homepage of the website and views dishes available .
-<img width="1440" alt="home1" src="https://github.com/user-attachments/assets/e91794e1-2c44-4f71-85f3-20b30bfe4cc4" />
-<img width="1440" alt="home2" src="https://github.com/user-attachments/assets/a37a5fe3-fadf-4b3b-b382-a9679c867671" />
+<img width="1440" alt="Screenshot 2025-01-11 at 4 01 07 PM" src="https://github.com/user-attachments/assets/eda73005-7cbf-47c0-8cca-c944a9deee12" />
+<img width="1440" alt="Screenshot 2025-01-11 at 4 01 12 PM" src="https://github.com/user-attachments/assets/e5256b72-b479-41ee-9d34-246ccfd0ad51" />
+<img width="1440" alt="Screenshot 2025-01-11 at 4 01 07 PM" src="https://github.com/user-attachments/assets/70548cf1-fa9e-406f-a202-368e9336551c" />
+
 
 #### Menu card
 Menu card on hover glows with neon box shadow , zooms in and other cards get blurred.
 <img width="1440" alt="Screenshot 2025-01-11 at 2 56 24 PM" src="https://github.com/user-attachments/assets/c60c4501-743d-4259-958b-cd0bb26ccdd8" />
+
 ###### Hover over Menu card
 <img width="1440" alt="Screenshot 2025-01-11 at 2 50 50 PM" src="https://github.com/user-attachments/assets/fcdd3f31-3a6c-477c-8a8d-660596a6fba3" />
 
