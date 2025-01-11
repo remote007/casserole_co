@@ -8,8 +8,7 @@ export async function loadMenu() {
 
         const contentContainer = document.querySelector('.content');
         contentContainer.innerHTML = ''; // Clear any existing content
-
-        // Add sorting dropdown
+        const firstContainer = document.createElement('div');
         const sortContainer = document.createElement('div');
         sortContainer.classList.add('sort-container');
         const sortDropdown = document.createElement('select');
@@ -33,7 +32,24 @@ export async function loadMenu() {
         sortDropdown.appendChild(descOption);
 
         sortContainer.appendChild(sortDropdown);
-        contentContainer.appendChild(sortContainer);
+        firstContainer.appendChild(sortContainer)
+        // contentContainer.appendChild(sortContainer);
+
+        // Add search input
+        const searchContainer = document.createElement('div');
+        searchContainer.classList.add('search-container');
+        const searchInput = document.createElement('input');
+        searchInput.classList.add('search-input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search by name...';
+
+        searchContainer.appendChild(searchInput);
+        searchContainer.style['width'] = '320px';
+        firstContainer.appendChild(searchContainer);
+        firstContainer.style['display'] = 'grid';
+        firstContainer.style['grid-template-columns'] = 'repeat(2,1fr)' ;
+        
+        contentContainer.appendChild(firstContainer);
 
         const grid = document.createElement('div');
         grid.classList.add('menu-grid');
@@ -93,16 +109,13 @@ export async function loadMenu() {
         // Initial render
         renderMenu(menu);
 
-        // Handle sort changes
-        sortDropdown.addEventListener('change', () => {
-            const sortValue = sortDropdown.value;
-            const sortedMenu = [...menu];
-            if (sortValue === 'asc') {
-                sortedMenu.sort((a, b) => a.price - b.price);
-            } else if (sortValue === 'desc') {
-                sortedMenu.sort((a, b) => b.price - a.price);
-            }
-            renderMenu(sortedMenu);
+        // Handle search input
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const filteredMenu = menu.filter(item =>
+                item.name.toLowerCase().includes(query)
+            );
+            renderMenu(filteredMenu);
         });
     } catch (error) {
         console.error('Error fetching menu:', error);
