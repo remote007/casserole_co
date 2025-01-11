@@ -22,11 +22,13 @@ export async function loadMenu() {
 
             // Create and append title
             const title = document.createElement('h3');
+            title.style["text-shadow"] = "0 0 4px rgba(233, 187, 4, 0.8), 0 0 7px rgba(233, 187, 4, 0.8), 0 0 9px rgba(233, 187, 4, 0.8)";
             title.textContent = item.name;
 
             // Create and append description
             const description = document.createElement('p');
             description.textContent = item.description;
+            description.style["font-size"] = "small";
 
             const price = document.createElement('p');
             price.textContent = "Price: ₹ "+item.price;

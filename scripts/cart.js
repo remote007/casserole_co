@@ -1,13 +1,4 @@
 const cart = (() => {
-    // function func(){
-    //     if(localStorage.getItem('isLoggedIn') == null || localStorage.getItem('isLoggedIn') != 'true')
-    //         {
-    //             // window.location.href("login.html");
-    //             alert("Please login to view cart");
-    //         }
-    // }
-    // // window.addEventListener("load", func);    
-    // document.onload = func();
 
     const CART_KEY = 'cart';
 

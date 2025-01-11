@@ -60,9 +60,13 @@ html, body {
     text-align: center;
     color: #5c4033;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 50px;
     margin: auto;
     padding: auto;
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
 }
 
 .navbar .nav-links {
@@ -78,6 +82,11 @@ html, body {
     width: 190px;
     margin-top: 15px;
     margin-left: 20px;
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
+    font-size: 40px;
 }
 
 #login_btn_id{
@@ -104,13 +113,16 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
+    background-color: #f8f1e1;
 }
 
 .menu-card {
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 7px rgba(233, 187, 4, 0.8), 
+                0 0 12px rgba(233, 187, 4, 0.8), 
+                0 0 19px rgba(233, 187, 4, 0.8);
     transition: transform 0.3s, box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -124,7 +136,7 @@ html, body {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-bottom: 2px solid #f4f4f4;
+    box-shadow: 0 14px 21px rgba(185, 127, 89, 0.8), 0 0 26px rgba(185, 127, 89, 0.6);
 }
 
 .menu-details {
@@ -133,15 +145,21 @@ html, body {
 }
 
 .menu-card h3 {
-    color: #5c4033;
+    color: #0c0c0c;
     font-size: 1.4em;
     margin-bottom: 15px;
+}
+
+.menu_description{
+    padding-bottom: 2px;
+    height: 40%;
 }
 
 .menu-card p {
     font-size: 1em;
     color: #666;
     margin: 5px 0;
+    font-style: italic;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', 'Arial', 'sans-serif';
 }
 
@@ -227,19 +245,20 @@ html, body {
 
 .add-to-cart-btn {
     display: inline-block;
-    background-color: #b97f59;
-    color: #ffffff;
+    color: #201f1f;
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
+    background: linear-gradient(to right bottom, #f2dcb7, #d99836);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .add-to-cart-btn:hover {
     background-color: #5c4033;
     transform: scale(1.05);
+    background: linear-gradient(to left, #f2dcb7, #d99836);
 }
 
 .add-to-cart-btn:active {
@@ -258,7 +277,7 @@ html, body {
 
 .menu-grid .menu-card:hover{
     filter: blur(0px);
-    box-shadow: 0 16px 28px rgba(185, 127, 89, 0.8), 0 0 32px rgba(185, 127, 89, 0.6);
+    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
     transform: scale(1.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
 
@@ -290,7 +309,7 @@ html, body {
     position: relative;
     height: 380px;
     background: url('../img/hero.jpeg') no-repeat center center/cover;
-    color: #fff;
+    color: #373434;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -312,12 +331,20 @@ html, body {
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 20px rgba(233, 187, 4, 0.8), 
+    0 0 30px rgba(233, 187, 4, 0.8);
     animation: fadeIn 2s ease-in-out;
 }
 
 .hero-content p {
-    font-size: 1.5rem;
+    font-size: large;
+    font-style: italic;
+    color: azure;
     margin-bottom: 2rem;
+    /* text-shadow: 0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 20px rgba(233, 187, 4, 0.8), 
+    0 0 30px rgba(233, 187, 4, 0.8); */
     animation: slideIn 2s ease-in-out;
 }
 
@@ -327,7 +354,7 @@ html, body {
     font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #1f1d1d;
     background: linear-gradient(to right, #f2dcb7, #d99836);
     border: none;
     border-radius: 30px;
@@ -385,6 +412,13 @@ html, body {
     }
 }
 
+#features_heading{
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
+}
+
 /* Features Section */
 .features {
     display: grid;
@@ -400,11 +434,16 @@ html, body {
     overflow: hidden; /* Ensure animations don't exceed section bounds */
 }
 
-.features h2 {
+.features h3 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #fff;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    color: #302d2d;
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
+    font-size: 1.5rem;
+    margin: 1rem 0;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -467,12 +506,6 @@ html, body {
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     animation: pulse 2s infinite;
-}
-
-.feature h3 {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    color: #8b4513;
 }
 
 .feature p {
@@ -543,6 +576,10 @@ html, body {
 .testimonials h2 {
     font-size: 2.5rem;
     margin-bottom: 30px;
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
 }
 
 .carousel {
@@ -603,12 +640,16 @@ html, body {
     margin-bottom: 20px;
     font-weight: bold;
     color: #4b3e2b;
+    text-shadow: 
+    0 0 7px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8), 
+    0 0 10px rgba(233, 187, 4, 0.8);
 }
 
 .cta-section p {
     font-size: 1.3rem;
     margin-bottom: 30px;
-    color: #6a553d;
+    color: #f7f3ee;
 }
 
 .cta-section .btn-cta {
@@ -617,7 +658,7 @@ html, body {
     font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #1c1919;
     background: linear-gradient(to right, #f5e1c0, #da9e45);
     border: none;
     border-radius: 30px;

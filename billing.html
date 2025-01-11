@@ -31,11 +31,15 @@
     <script src="./scripts/main.js" type="module"></script>
     <script>
         function func(){
-            console.log("here");
             if(localStorage.getItem('isLoggedIn') == null || localStorage.getItem('isLoggedIn') != 'true')
             {
                 window.location.href = "login.html";
                 alert("Please login to view cart");
+            }
+            if(localStorage.getItem('cart') == null)
+            {
+                window.location.href = "menu.html";
+                alert("Your cart is empty , please add food items.");
             }
         }
         window.document.onload = func();
