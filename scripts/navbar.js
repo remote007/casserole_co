@@ -7,7 +7,7 @@ export function loadNavbar() {
         if(sessionStorage.getItem('user')!=null)
         { 
             const navAuthBtn = document.getElementById('login_btn_id');
-            navAuthBtn.textContent = "Logout";
+            navAuthBtn.innerHTML = '<i class="fas fa-user"></i> Logout';
             navAuthBtn.href = '#';
             navAuthBtn.onclick = (e) => {
                 e.preventDefault();
