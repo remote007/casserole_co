@@ -180,6 +180,12 @@ const ordersPage = (() => {
     };
 
     const init = async () => {
+        const userSession = sessionStorage.getItem('user');
+        if (!userSession) {
+            alert('Login to view cart is logged in. Redirecting to login.');
+            window.location.href = 'login.html';
+            return;
+        }
         await fetchOrders(); // Fetch and display orders when the page loads
     };
 
