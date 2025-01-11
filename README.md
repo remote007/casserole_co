@@ -23,8 +23,7 @@ JavaScript
 Customer lands on homepage of the website and views dishes available .
 <img width="1440" alt="Screenshot 2025-01-11 at 4 01 07 PM" src="https://github.com/user-attachments/assets/eda73005-7cbf-47c0-8cca-c944a9deee12" />
 <img width="1440" alt="Screenshot 2025-01-11 at 4 01 12 PM" src="https://github.com/user-attachments/assets/e5256b72-b479-41ee-9d34-246ccfd0ad51" />
-<img width="1440" alt="Screenshot 2025-01-11 at 4 01 07 PM" src="https://github.com/user-attachments/assets/70548cf1-fa9e-406f-a202-368e9336551c" />
-
+<img width="1440" alt="Screenshot 2025-01-11 at 4 01 17 PM" src="https://github.com/user-attachments/assets/a0960dfd-96ab-4e7c-8358-cd81bf74d0bd" />
 
 #### Menu card
 Menu card on hover glows with neon box shadow , zooms in and other cards get blurred.
