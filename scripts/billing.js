@@ -53,7 +53,7 @@ const billing = (() => {
         });
     };
 
-    // Function to place the order
+    // Function to place the order after payment success
     const placeOrder = async () => {
         const userSession = sessionStorage.getItem('user');
         if (!userSession) {
@@ -70,6 +70,17 @@ const billing = (() => {
             return;
         }
 
+        // Check if payment was successful
+        const paymentStatus = sessionStorage.getItem('paymentStatus');
+        if (paymentStatus !== 'success') {
+            alert('Payment was not successful. Please try again.');
+            window.location.href = 'payment.html'; // Redirect to payment page if payment failed
+            return;
+        }
+
+        // Prepare order data
+        const totalAmount = await cart.getTotal();
+        
         // Fetch the existing orders to determine the length for the orderId
         let orderId;
         try {
@@ -122,7 +133,6 @@ const billing = (() => {
         }
     };
 
-    // Function to initialize the billing page
     const init = async () => {
         // Retrieve user data from sessionStorage
         const userSession = sessionStorage.getItem('user');
@@ -146,4 +156,3 @@ const billing = (() => {
 })();
 
 export default billing;
-

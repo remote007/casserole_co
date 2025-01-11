@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="styles/styles.css"> <!-- Link to your CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .payment-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .payment-method:hover {
+            background-color: #ddd;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .payment-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Select Payment Method</h2>
+        <div class="payment-methods">
+            <!-- UPI Option -->
+            <div class="payment-method" id="upi-option">
+                <h3>UPI Payment</h3>
+                <p>Pay using UPI (e.g., Google Pay, PhonePe, etc.)</p>
+            </div>
+            
+            <!-- Debit/Credit Card Option -->
+            <div class="payment-method" id="card-option">
+                <h3>Debit/Credit Card</h3>
+                <p>Pay using a debit or credit card.</p>
+            </div>
+
+            <!-- Cash on Delivery (COD) Option -->
+            <div class="payment-method" id="cod-option">
+                <h3>Cash on Delivery (COD)</h3>
+                <p>Pay when the order is delivered.</p>
+            </div>
+        </div>
+
+        <!-- UPI Form (Hidden initially) -->
+        <div class="payment-form" id="upi-form">
+            <h3>Enter UPI ID</h3>
+            <div class="form-group">
+                <label for="upi-id">UPI ID</label>
+                <input type="text" id="upi-id" placeholder="example@upi">
+            </div>
+            <input type="submit" class="btn-class" value="Proceed with UPI Payment" id="upi-submit">
+        </div>
+
+        <!-- Debit/Credit Card Form (Hidden initially) -->
+        <div class="payment-form" id="card-form">
+            <h3>Enter Card Details</h3>
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="number" id="card-number" placeholder="Card Number">
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Expiry Date</label>
+                <input type="date" id="expiry-date">
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv" placeholder="CVV">
+            </div>
+            <input type="submit" class="btn-class" value="Proceed with Card Payment" id="card-submit">
+        </div>
+
+        <!-- COD Form (Hidden initially) -->
+        <div class="payment-form" id="cod-form">
+            <h3>Confirm Order</h3>
+            <p>You have selected Cash on Delivery as your payment method.</p>
+            <input type="submit" class="btn-class" value="Confirm COD Order" id="cod-submit">
+        </div>
+    </div>
+
+    <script>
+        // Handle payment method selection
+        const upiOption = document.getElementById('upi-option');
+        const cardOption = document.getElementById('card-option');
+        const codOption = document.getElementById('cod-option');
+
+        const upiForm = document.getElementById('upi-form');
+        const cardForm = document.getElementById('card-form');
+        const codForm = document.getElementById('cod-form');
+
+        // Toggle forms based on selected payment method
+        upiOption.addEventListener('click', () => {
+            upiForm.style.display = 'block';
+            cardForm.style.display = 'none';
+            codForm.style.display = 'none';
+        });
+
+        cardOption.addEventListener('click', () => {
+            upiForm.style.display = 'none';
+            cardForm.style.display = 'block';
+            codForm.style.display = 'none';
+        });
+
+        codOption.addEventListener('click', () => {
+            upiForm.style.display = 'none';
+            cardForm.style.display = 'none';
+            codForm.style.display = 'block';
+        });
+
+        // Simulate payment confirmation for UPI
+        document.getElementById('upi-submit').addEventListener('click', () => {
+            const upiId = document.getElementById('upi-id').value;
+            if (upiId) {
+                alert(`UPI Payment Successful for ID: ${upiId}`);
+                processPayment('UPI', upiId);
+            } else {
+                alert('Please enter a valid UPI ID.');
+            }
+        });
+
+        // Simulate payment confirmation for Debit/Credit Card
+        document.getElementById('card-submit').addEventListener('click', () => {
+            const cardNumber = document.getElementById('card-number').value;
+            const expiryDate = document.getElementById('expiry-date').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (cardNumber && expiryDate && cvv) {
+                alert(`Card Payment Successful for card ending with ${cardNumber.slice(-4)}`);
+                processPayment('Card', cardNumber);
+            } else {
+                alert('Please fill in all card details.');
+            }
+        });
+
+        // Simulate payment confirmation for Cash on Delivery (COD)
+        document.getElementById('cod-submit').addEventListener('click', () => {
+            alert('Cash on Delivery Order Confirmed.');
+            processPayment('COD');
+        });
+
+        // Function to simulate processing the payment and returning a success message
+        const processPayment = (method, paymentDetails) => {
+            return new Promise((resolve, reject) => {
+                const success = Math.random() > 0.3; // 70% chance of success
+                setTimeout(() => {
+                    if (success) {
+                        resolve(`${method} payment successful!`);
+                        sessionStorage.setItem('paymentStatus', 'success'); // Store payment success status
+                        window.location.href = 'billing.html'; // Redirect to billing page
+                    } else {
+                        reject(`${method} payment failed. Please try again.`);
+                        alert(`${method} payment failed. Please try again.`);
+                    }
+                }, 2000); // Simulate a 2-second delay
+            });
+        };
+    </script>
+</body>
+</html>
