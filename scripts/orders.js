@@ -2,25 +2,26 @@ const ordersPage = (() => {
     // Helper function to calculate remaining time
     const getRemainingTime = (orderTime) => {
         const currentTime = new Date();
-        const timeDiff = orderTime - currentTime;
+        const thirtyMinutesAfterOrder = new Date(orderTime.getTime() + 30 * 60 * 1000);
+        const timeDiff = thirtyMinutesAfterOrder - currentTime;
 
         if (timeDiff <= 0) {
-            return null; // Return null if the order is delivered
+            return null; // Return null if 30 minutes have passed
         }
 
-        const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
-        const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const minutesRemaining = Math.floor(timeDiff / (1000 * 60));
+        const secondsRemaining = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-        return `${hoursRemaining} hours and ${minutesRemaining} minutes remaining`;
+        return `${minutesRemaining} minutes and ${secondsRemaining} seconds remaining`;
     };
 
-    // Function to update delivery status if more than 30 minutes passed
+    // Function to update delivery status
     const updateDeliveryStatus = async (orderId) => {
         try {
             const response = await fetch(`https://casserolecoserver.glitch.me/orders/${orderId}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     delivered: true,
@@ -41,7 +42,7 @@ const ordersPage = (() => {
     const fetchOrders = async () => {
         const userSession = sessionStorage.getItem('user');
         if (!userSession) {
-            alert('You need to be logged in to view your orders.');
+            alert('You need to log in to view your orders.');
             window.location.href = 'login.html';
             return;
         }
@@ -57,7 +58,6 @@ const ordersPage = (() => {
 
             const orders = await response.json();
 
-            // Filter orders for the current user
             const userOrders = orders.filter(order => order.username === username);
 
             if (userOrders.length === 0) {
@@ -65,10 +65,8 @@ const ordersPage = (() => {
                 return;
             }
 
-            // Sort orders by orderId (descending order)
             userOrders.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-            // Render orders with styled DOM elements
             const ordersListContainer = document.getElementById('orders-list');
             ordersListContainer.innerHTML = ''; // Clear previous orders
 
@@ -107,13 +105,94 @@ const ordersPage = (() => {
                 orderDiv.appendChild(orderDate);
                 orderDiv.appendChild(orderStatus);
 
-                // Remaining time (if applicable)
+                // Remaining time with sand timer animation
                 if (!order.delivered && remainingTime) {
-                    const remainingTimeParagraph = document.createElement('p');
-                    remainingTimeParagraph.textContent = `Remaining Time: ${remainingTime}`;
-                    remainingTimeParagraph.style.color = '#ff5722';
-                    remainingTimeParagraph.style.marginBottom = '16px';
-                    orderDiv.appendChild(remainingTimeParagraph);
+                    const timerContainer = document.createElement('div');
+                    timerContainer.style.display = 'flex';
+                    timerContainer.style.alignItems = 'center';
+                    timerContainer.style.marginTop = '8px';
+
+                    // Sand timer container
+                    const sandTimer = document.createElement('div');
+                    sandTimer.style.width = '40px';
+                    sandTimer.style.height = '60px';
+                    sandTimer.style.position = 'relative';
+                    sandTimer.style.border = '2px solid #000';
+                    sandTimer.style.borderRadius = '8px';
+                    sandTimer.style.marginRight = '12px';
+                    sandTimer.style.overflow = 'hidden';
+
+                    // Top sand
+                    const topSand = document.createElement('div');
+                    topSand.style.width = '100%';
+                    topSand.style.height = '50%';
+                    topSand.style.backgroundColor = '#ffb74d';
+                    topSand.style.position = 'absolute';
+                    topSand.style.top = '0';
+                    topSand.style.transition = 'height 1s linear';
+
+                    // Falling sand animation
+                    const fallingSand = document.createElement('div');
+                    fallingSand.style.width = '10px';
+                    fallingSand.style.height = '10px';
+                    fallingSand.style.backgroundColor = '#ffb74d';
+                    fallingSand.style.position = 'absolute';
+                    fallingSand.style.top = '50%';
+                    fallingSand.style.left = '50%';
+                    fallingSand.style.transform = 'translate(-50%, -50%)';
+                    fallingSand.style.animation = 'falling 1s infinite linear';
+
+                    // Bottom sand
+                    const bottomSand = document.createElement('div');
+                    bottomSand.style.width = '100%';
+                    bottomSand.style.height = '0';
+                    bottomSand.style.backgroundColor = '#ffb74d';
+                    bottomSand.style.position = 'absolute';
+                    bottomSand.style.bottom = '0';
+                    bottomSand.style.transition = 'height 1s linear';
+
+                    sandTimer.appendChild(topSand);
+                    sandTimer.appendChild(fallingSand);
+                    sandTimer.appendChild(bottomSand);
+
+                    // Remaining time text
+                    const remainingTimeText = document.createElement('span');
+                    remainingTimeText.textContent = remainingTime;
+                    remainingTimeText.style.color = '#ff5722';
+                    remainingTimeText.style.fontWeight = 'bold';
+
+                    timerContainer.appendChild(sandTimer);
+                    timerContainer.appendChild(remainingTimeText);
+
+                    orderDiv.appendChild(timerContainer);
+
+                    // Update the sand timer and remaining time every second
+                    const intervalId = setInterval(() => {
+                        const updatedRemainingTime = getRemainingTime(orderTime);
+                        if (updatedRemainingTime) {
+                            remainingTimeText.textContent = updatedRemainingTime;
+
+                            // Simulate sand movement
+                            const totalSeconds = 30 * 60;
+                            const elapsedSeconds =
+                                (new Date().getTime() - orderTime.getTime()) / 1000;
+                            const topSandHeight = Math.max(
+                                0,
+                                50 - (50 * elapsedSeconds) / totalSeconds
+                            );
+                            const bottomSandHeight = Math.min(
+                                50,
+                                (50 * elapsedSeconds) / totalSeconds
+                            );
+
+                            topSand.style.height = `${topSandHeight}%`;
+                            bottomSand.style.height = `${bottomSandHeight}%`;
+                        } else {
+                            remainingTimeText.textContent = 'Delivered';
+                            sandTimer.style.display = 'none';
+                            clearInterval(intervalId);
+                        }
+                    }, 1000);
                 }
 
                 // Items list
@@ -141,13 +220,9 @@ const ordersPage = (() => {
                 // Append the order div to the orders list container
                 ordersListContainer.appendChild(orderDiv);
 
-                // Check if the order has been placed for more than 30 minutes and is not delivered
-                const currentTime = new Date();
-                const timeDiff = currentTime - orderTime;
-                const thirtyMinutesInMs = 30 * 60 * 1000;
-
-                if (!order.delivered && timeDiff >= thirtyMinutesInMs) {
-                    updateDeliveryStatus(order.orderId);
+                // Check if 30 minutes have passed
+                if (!order.delivered && new Date() - orderTime >= 30 * 60 * 1000) {
+                    updateDeliveryStatus(order.id);
                 }
             });
         } catch (error) {
