@@ -92,8 +92,9 @@ const orderPayment = (() => {
 
     // Function to place the order after payment success
     const placeOrder = async () => {
-        
+        const cartItems = await cart.getItems();
         checkSessionCart();
+        const userSession = sessionStorage.getItem('user');
         const user = JSON.parse(userSession);
 
         const paymentStatus = sessionStorage.getItem('paymentStatus');
@@ -147,7 +148,7 @@ const orderPayment = (() => {
 
             alert('Order placed successfully!');
             await cart.clear(); // Clear the cart after successful order
-            window.location.href = 'orders.html'; // Redirect to homepage
+            window.location.href = 'order.html'; // Redirect to homepage
         } catch (error) {
             console.error('Error placing the order:', error);
             alert('Could not place your order. Please try again later.');
