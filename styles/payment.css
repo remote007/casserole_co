@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(145deg, #f1e0b6, #ffcc77); /* Soft golden gradient */
+    background: linear-gradient(145deg, #fbce5b, #ca8919); /* Soft golden gradient */
 }
 
 .payment-container {
