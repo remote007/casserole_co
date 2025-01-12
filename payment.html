@@ -66,68 +66,6 @@
         </div>
     </div>
 
-    <script>
-        // Handle payment method selection
-        const upiOption = document.getElementById('upi-option');
-        const cardOption = document.getElementById('card-option');
-        const codOption = document.getElementById('cod-option');
-    
-        const upiForm = document.getElementById('upi-form');
-        const cardForm = document.getElementById('card-form');
-        const codForm = document.getElementById('cod-form');
-    
-        // Toggle forms based on selected payment method
-        upiOption.addEventListener('click', () => {
-            upiForm.style.display = 'block';
-            cardForm.style.display = 'none';
-            codForm.style.display = 'none';
-        });
-    
-        cardOption.addEventListener('click', () => {
-            upiForm.style.display = 'none';
-            cardForm.style.display = 'block';
-            codForm.style.display = 'none';
-        });
-    
-        codOption.addEventListener('click', () => {
-            upiForm.style.display = 'none';
-            cardForm.style.display = 'none';
-            codForm.style.display = 'block';
-        });
-    
-        // Always successful UPI Payment
-        document.getElementById('upi-submit').addEventListener('click', () => {
-            const upiId = document.getElementById('upi-id').value;
-            if (upiId) {
-                alert(`UPI Payment Successful for ID: ${upiId}`);
-                sessionStorage.setItem('paymentStatus', 'success');
-                window.location.href = 'billing.html'; // Redirect to billing page
-            } else {
-                alert('Please enter a valid UPI ID.');
-            }
-        });
-    
-        // Always successful Debit/Credit Card Payment
-        document.getElementById('card-submit').addEventListener('click', () => {
-            const cardNumber = document.getElementById('card-number').value;
-            const expiryDate = document.getElementById('expiry-date').value;
-            const cvv = document.getElementById('cvv').value;
-    
-            if (cardNumber && expiryDate && cvv) {
-                alert(`Card Payment Successful for card ending with ${cardNumber.slice(-4)}`);
-                sessionStorage.setItem('paymentStatus', 'success');
-                window.location.href = 'billing.html'; // Redirect to billing page
-            } else {
-                alert('Please fill in all card details.');
-            }
-        });
-    
-        // Always successful Cash on Delivery (COD) Confirmation
-        document.getElementById('cod-submit').addEventListener('click', () => {
-            alert('Cash on Delivery Order Confirmed.');
-            sessionStorage.setItem('paymentStatus', 'success');
-            window.location.href = 'billing.html'; // Redirect to billing page
-        });
-    </script>
 </body>
+<script src="/scripts/payment.js" type="module"></script>
 </html>
