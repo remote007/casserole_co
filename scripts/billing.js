@@ -70,9 +70,12 @@ const billing = (() => {
             return;
         }
 
-        // Check if payment was successful
         const paymentStatus = sessionStorage.getItem('paymentStatus');
-        if (paymentStatus !== 'success') {
+        if (paymentStatus == null) {
+            window.location.href = 'payment.html'; // Redirect to payment page if payment failed
+            return;
+        }
+        else if (paymentStatus !== 'success') {
             alert('Payment was not successful. Please try again.');
             window.location.href = 'payment.html'; // Redirect to payment page if payment failed
             return;
