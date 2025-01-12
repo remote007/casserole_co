@@ -32,12 +32,12 @@ export async function loadMenu() {
         sortDropdown.appendChild(descOption);
 
         sortContainer.appendChild(sortDropdown);
-        sortContainer.style['width'] = '120px';
-        sortContainer.style['text-align'] =  'center';
-        sortContainer.style['justify-content'] =  'center';
-        sortContainer.style['margin-right'] = '0px';
-        sortContainer.style['padding-right'] = '0px';
+        sortContainer.style['width'] = '150px';
         sortContainer.style['margin'] = 'auto';
+        sortContainer.style['text-align'] =  'left';
+        sortContainer.style['justify-content'] =  'left';
+        sortContainer.style['margin-left'] = '0px';
+        sortContainer.style['padding-left'] = '0px';
         firstContainer.appendChild(sortContainer)
         // contentContainer.appendChild(sortContainer);
 
@@ -53,17 +53,23 @@ export async function loadMenu() {
         searchContainer.style['width'] = '320px';
         searchContainer.style['margin-left'] = '0px';
         searchContainer.style['padding-left'] = '0px';
+        searchContainer.style['margin'] = 'auto';
+        searchContainer.style['text-align'] =  'left';
         firstContainer.appendChild(searchContainer);
         firstContainer.style['display'] = 'grid';
         firstContainer.style['grid-template-columns'] = 'repeat(3,1fr)' ;
         firstContainer.style['margin'] = 'auto';
-        sortContainer.style['justify-content'] =  'left';
+        searchContainer.style['justify-content'] =  'left';
 
         const itemsPerPage = 10; // Number of items per page
         let currentPage = 1;
 
         const paginationContainer = document.createElement('div');
         paginationContainer.classList.add('pagination-container');
+        paginationContainer.style['margin-right'] = '0px';
+        paginationContainer.style['padding-right'] = '0px';
+        paginationContainer.style['text-align'] =  'right';
+        paginationContainer.style['justify-content'] =  'right';
         firstContainer.appendChild(paginationContainer);
         contentContainer.appendChild(firstContainer);
 
