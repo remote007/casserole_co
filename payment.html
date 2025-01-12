@@ -4,53 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Page</title>
-    <link rel="stylesheet" href="styles/styles.css"> <!-- Link to your CSS -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .payment-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .payment-methods {
-            margin-bottom: 20px;
-        }
-        .payment-method {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .payment-method:hover {
-            background-color: #ddd;
-        }
-        .form-group {
-            margin: 10px 0;
-        }
-        input[type="text"], input[type="number"], input[type="date"], input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .payment-form {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/payment.css">
 </head>
 <body>
     <div class="payment-container">
@@ -116,77 +71,63 @@
         const upiOption = document.getElementById('upi-option');
         const cardOption = document.getElementById('card-option');
         const codOption = document.getElementById('cod-option');
-
+    
         const upiForm = document.getElementById('upi-form');
         const cardForm = document.getElementById('card-form');
         const codForm = document.getElementById('cod-form');
-
+    
         // Toggle forms based on selected payment method
         upiOption.addEventListener('click', () => {
             upiForm.style.display = 'block';
             cardForm.style.display = 'none';
             codForm.style.display = 'none';
         });
-
+    
         cardOption.addEventListener('click', () => {
             upiForm.style.display = 'none';
             cardForm.style.display = 'block';
             codForm.style.display = 'none';
         });
-
+    
         codOption.addEventListener('click', () => {
             upiForm.style.display = 'none';
             cardForm.style.display = 'none';
             codForm.style.display = 'block';
         });
-
-        // Simulate payment confirmation for UPI
+    
+        // Always successful UPI Payment
         document.getElementById('upi-submit').addEventListener('click', () => {
             const upiId = document.getElementById('upi-id').value;
             if (upiId) {
                 alert(`UPI Payment Successful for ID: ${upiId}`);
-                processPayment('UPI', upiId);
+                sessionStorage.setItem('paymentStatus', 'success');
+                window.location.href = 'billing.html'; // Redirect to billing page
             } else {
                 alert('Please enter a valid UPI ID.');
             }
         });
-
-        // Simulate payment confirmation for Debit/Credit Card
+    
+        // Always successful Debit/Credit Card Payment
         document.getElementById('card-submit').addEventListener('click', () => {
             const cardNumber = document.getElementById('card-number').value;
             const expiryDate = document.getElementById('expiry-date').value;
             const cvv = document.getElementById('cvv').value;
-
+    
             if (cardNumber && expiryDate && cvv) {
                 alert(`Card Payment Successful for card ending with ${cardNumber.slice(-4)}`);
-                processPayment('Card', cardNumber);
+                sessionStorage.setItem('paymentStatus', 'success');
+                window.location.href = 'billing.html'; // Redirect to billing page
             } else {
                 alert('Please fill in all card details.');
             }
         });
-
-        // Simulate payment confirmation for Cash on Delivery (COD)
+    
+        // Always successful Cash on Delivery (COD) Confirmation
         document.getElementById('cod-submit').addEventListener('click', () => {
             alert('Cash on Delivery Order Confirmed.');
-            processPayment('COD');
+            sessionStorage.setItem('paymentStatus', 'success');
+            window.location.href = 'billing.html'; // Redirect to billing page
         });
-
-        // Function to simulate processing the payment and returning a success message
-        const processPayment = (method, paymentDetails) => {
-            return new Promise((resolve, reject) => {
-                const success = Math.random() > 0.3; // 70% chance of success
-                setTimeout(() => {
-                    if (success) {
-                        resolve(`${method} payment successful!`);
-                        sessionStorage.setItem('paymentStatus', 'success'); // Store payment success status
-                        window.location.href = 'billing.html'; // Redirect to billing page
-                    } else {
-                        reject(`${method} payment failed. Please try again.`);
-                        alert(`${method} payment failed. Please try again.`);
-                    }
-                }, 2000); // Simulate a 2-second delay
-            });
-        };
     </script>
 </body>
 </html>
