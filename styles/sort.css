@@ -1,0 +1,10 @@
+.sort-container {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.sort-dropdown {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
