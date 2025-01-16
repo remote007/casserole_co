@@ -1,3 +1,4 @@
+/* Main billing container styling */
 .billing-container {
     max-width: 800px;
     margin: auto;
@@ -7,15 +8,20 @@
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); 
     text-align: center;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
+/* Cart item row */
 .cart-item {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 10px; /* Add gap between wrapped items */
 }
 
+/* Cart total */
 .cart-total {
     text-align: right;
     font-size: 1.2em;
@@ -23,6 +29,7 @@
     margin-top: 20px;
 }
 
+/* Checkout button */
 #checkout-btn {
     display: block;
     margin: 20px auto;
@@ -33,26 +40,92 @@
     border-radius: 5px;
     cursor: pointer;
     width: 180px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
-.item-table{
-    width: 630px;
+#checkout-btn:hover {
+    background-color: #4a3328;
 }
 
-.item-row-heading{
-    width: 130px;
+/* Item table adjustments */
+.item-table {
+    width: 100%; /* Make it adapt to container width */
+    margin: 10px 0;
+}
+
+/* Table header row styling */
+.item-row-heading {
+    width: auto; /* Remove fixed width for flexibility */
     background-color: #f8f1e1;
     color: #5c4033;
     text-align: center;
+    font-weight: bold;
+    padding: 10px;
 }
 
-.item-row-data{
-    width: 130px;
-    background-color: #f8f1e1;
+/* Table data row styling */
+.item-row-data {
+    width: auto; /* Remove fixed width for flexibility */
+    background-color: #f8f1e1;;
     color: #5c4033;
     text-align: center;
+    padding: 10px;
 }
 
-.quantity-input{
+/* Quantity input box */
+.quantity-input {
     width: 60px;
+    text-align: center;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .billing-container {
+        max-width: 95%; /* Reduce width to fit smaller screens */
+        padding: 15px;
+        text-align: left; /* Align text to the left for better readability */
+    }
+
+    .cart-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    #checkout-btn {
+        width: 100%; /* Make button full width */
+        padding: 15px; /* Increase padding */
+        font-size: 1.1em; /* Increase font size */
+    }
+
+    .item-row-heading,
+    .item-row-data {
+        font-size: 0.9em; /* Reduce font size slightly */
+        padding: 8px; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .billing-container {
+        max-width: 100%; /* Full width on very small screens */
+        padding: 10px;
+    }
+
+    .cart-item {
+        gap: 5px; /* Reduce gap for smaller screens */
+    }
+
+    #checkout-btn {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .quantity-input {
+        width: 50px; /* Adjust input size for small screens */
+    }
+
+    .item-row-heading,
+    .item-row-data {
+        font-size: 0.8em; /* Further reduce font size */
+    }
 }
