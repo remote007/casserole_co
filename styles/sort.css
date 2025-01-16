@@ -1,10 +1,31 @@
 .sort-container {
-    margin: 10px 0;
-    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 340px; /* Adjust the width as needed */
 }
 
 .sort-dropdown {
-    padding: 5px 10px;
-    font-size: 16px;
+    appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 0.5rem;
+    padding-right: 2.5rem; /* Space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    background-color: white;
+    font-size: 1rem;
+    color: #333;
+
+    /* Adding the filter icon */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" width="24" height="24"%3E%3Cpath d="M10 18h4v-2h-4v2zm-8-7v2h16v-2h-16zm2-6v2h12v-2h-12z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
     cursor: pointer;
+}
+
+.sort-dropdown:focus {
+    border-color: #888;
+    outline: none;
 }

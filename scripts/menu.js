@@ -1,237 +1,144 @@
+import { renderPagination } from './pagination.js';
+import { createSearchInput } from './search.js';
+import { createSortDropdown } from './sort.js';
 import { auth } from './auth.js';
 import cart from './cart.js';
 
 export async function loadMenu() {
     try {
         const response = await fetch('https://casserolecoserver.glitch.me/menu');
-        let menu = await response.json();
+        let menu = await response.json(); // Full menu data
 
         const contentContainer = document.querySelector('.content');
         contentContainer.innerHTML = ''; // Clear any existing content
+
         const firstContainer = document.createElement('div');
-        const sortContainer = document.createElement('div');
-        sortContainer.classList.add('sort-container');
-        const sortDropdown = document.createElement('select');
-        sortDropdown.classList.add('sort-dropdown');
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Sort by Price';
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-
-        const ascOption = document.createElement('option');
-        ascOption.value = 'asc';
-        ascOption.textContent = 'Price: Low to High';
-
-        const descOption = document.createElement('option');
-        descOption.value = 'desc';
-        descOption.textContent = 'Price: High to Low';
-
-        sortDropdown.appendChild(defaultOption);
-        sortDropdown.appendChild(ascOption);
-        sortDropdown.appendChild(descOption);
-
-        sortContainer.appendChild(sortDropdown);
-        sortContainer.style['width'] = '150px';
-        sortContainer.style['margin'] = 'auto';
-        sortContainer.style['text-align'] =  'left';
-        sortContainer.style['justify-content'] =  'left';
-        sortContainer.style['margin-left'] = '0px';
-        sortContainer.style['padding-left'] = '0px';
-        firstContainer.appendChild(sortContainer)
-        // contentContainer.appendChild(sortContainer);
-
-        // Add search input
-        const searchContainer = document.createElement('div');
-        searchContainer.classList.add('search-container');
-        const searchInput = document.createElement('input');
-        searchInput.classList.add('search-input');
-        searchInput.type = 'text';
-        searchInput.placeholder = 'Search by name...';
-
-        searchContainer.appendChild(searchInput);
-        searchContainer.style['width'] = '320px';
-        searchContainer.style['margin-left'] = '0px';
-        searchContainer.style['padding-left'] = '0px';
-        searchContainer.style['margin'] = 'auto';
-        searchContainer.style['text-align'] =  'left';
-        firstContainer.appendChild(searchContainer);
-        firstContainer.style['display'] = 'grid';
-        firstContainer.style['grid-template-columns'] = 'repeat(3,1fr)' ;
-        firstContainer.style['margin'] = 'auto';
-        searchContainer.style['justify-content'] =  'left';
-
-        const itemsPerPage = 10; // Number of items per page
+        const itemsPerPage = 10;
         let currentPage = 1;
+        let filteredMenu = [...menu]; // Copy of the full menu for filtering and sorting
+
+        // Sort Dropdown
+        const sortContainer = createSortDropdown(sortValue => {
+            if (sortValue === 'asc') {
+                filteredMenu.sort((a, b) => a.price - b.price);
+            } else if (sortValue === 'desc') {
+                filteredMenu.sort((a, b) => b.price - a.price);
+            }
+            currentPage = 1; // Reset to the first page after sorting
+            renderMenu(filteredMenu, currentPage);
+        });
+
+        // Search Input
+        const searchContainer = createSearchInput(query => {
+            filteredMenu = menu.filter(item =>
+                item.name.toLowerCase().includes(query) // Search in the full menu
+            );
+            currentPage = 1; // Reset to the first page after filtering
+            renderMenu(filteredMenu, currentPage);
+        });
+
+        // Style the control container
+        firstContainer.style.display = 'grid';
+        firstContainer.style.gridTemplateColumns = 'repeat(3,1fr)';
+        firstContainer.style.margin = 'auto';
 
         const paginationContainer = document.createElement('div');
-        paginationContainer.classList.add('pagination-container');
-        paginationContainer.style['margin-right'] = '0px';
-        paginationContainer.style['padding-right'] = '0px';
-        paginationContainer.style['text-align'] =  'right';
-        paginationContainer.style['justify-content'] =  'right';
-        firstContainer.appendChild(paginationContainer);
         contentContainer.appendChild(firstContainer);
 
         const grid = document.createElement('div');
         grid.classList.add('menu-grid');
         contentContainer.appendChild(grid);
 
+        // Function to render the menu with pagination
         function renderMenu(menuItems, page = 1) {
-            grid.innerHTML = ''; // Clear existing menu
+            grid.innerHTML = ''; // Clear existing menu items
+            paginationContainer.innerHTML = ''; // Clear pagination
+
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = page * itemsPerPage;
             const itemsToShow = menuItems.slice(startIndex, endIndex);
 
+            // Render menu items
             itemsToShow.forEach(item => {
-                // Create card container
                 const card = document.createElement('div');
                 card.classList.add('menu-card');
 
-                // Create and append image
                 const image = document.createElement('img');
                 image.src = `img/${item.imageUrl}`;
                 image.alt = item.name;
                 image.classList.add('menu-image');
-                card.appendChild(image);
 
-                // Create and append title
                 const title = document.createElement('h3');
-                title.style["text-shadow"] = "0 0 4px rgba(233, 187, 4, 0.8), 0 0 7px rgba(233, 187, 4, 0.8), 0 0 9px rgba(233, 187, 4, 0.8)";
                 title.textContent = item.name;
 
-                // Create and append description
                 const description = document.createElement('p');
                 description.textContent = item.description;
-                description.style["font-size"] = "small";
 
                 const price = document.createElement('p');
-                price.textContent = "Price: ₹ " + item.price;
-                price.style["font-family"] = "sans-serif";
-                price.style["font-size"] = "medium";
-                price.style["color"] = "black";
+                price.textContent = `Price: ₹${item.price}`;
 
-                const menu_desc = document.createElement('div');
-                menu_desc.classList.add('menu_description');
-
-                menu_desc.appendChild(title);
-                menu_desc.appendChild(description);
-                menu_desc.appendChild(price);
-
-                card.appendChild(menu_desc);
-
-                // Create and append "Add to Cart" button
                 const button = document.createElement('button');
                 button.textContent = 'Add to Cart';
                 button.classList.add('add-to-cart-btn');
                 button.onclick = () => addToCart(item);
-                card.appendChild(button);
 
-                // Append card to content container
+                card.append(image, title, description, price, button);
                 grid.appendChild(card);
             });
 
-            renderPagination(menuItems, page);
-        }
-
-
-        function renderPagination(menuItems, currentPage) {
-            paginationContainer.innerHTML = ''; // Clear existing pagination
-
-            const totalPages = Math.ceil(menuItems.length / itemsPerPage);
-
-            // Previous button
-            const prevButton = document.createElement('button');
-            prevButton.textContent = 'Previous';
-            prevButton.disabled = currentPage === 1;
-            prevButton.onclick = () => {
-                renderMenu(menuItems, currentPage - 1);
-            };
-            paginationContainer.appendChild(prevButton);
-
-            // Page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                pageButton.classList.add('page-button');
-                if (i === currentPage) {
-                    pageButton.classList.add('active');
+            // Render pagination
+            const pagination = renderPagination(
+                menuItems,
+                page,
+                itemsPerPage,
+                newPage => {
+                    currentPage = newPage;
+                    renderMenu(menuItems, newPage);
                 }
-                pageButton.onclick = () => {
-                    renderMenu(menuItems, i);
-                };
-                paginationContainer.appendChild(pageButton);
-            }
-
-            // Next button
-            const nextButton = document.createElement('button');
-            nextButton.textContent = 'Next';
-            nextButton.disabled = currentPage === totalPages;
-            nextButton.onclick = () => {
-                renderMenu(menuItems, currentPage + 1);
-            };
-            paginationContainer.appendChild(nextButton);
-
+            );
+            paginationContainer.appendChild(pagination);
         }
+
+        firstContainer.appendChild(sortContainer);
+        firstContainer.appendChild(searchContainer);
+        firstContainer.appendChild(paginationContainer);
 
         // Initial render
-        renderMenu(menu);
-
-        sortDropdown.addEventListener('change', () => {
-            const sortValue = sortDropdown.value;
-            const sortedMenu = [...menu];
-            if (sortValue === 'asc') {
-                sortedMenu.sort((a, b) => a.price - b.price);
-            } else if (sortValue === 'desc') {
-                sortedMenu.sort((a, b) => b.price - a.price);
-            }
-            renderMenu(sortedMenu);
-        });
-
-        // Handle search input
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value.toLowerCase();
-            const filteredMenu = menu.filter(item =>
-                item.name.toLowerCase().includes(query)
-            );
-            renderMenu(filteredMenu);
-        });
+        renderMenu(filteredMenu);
     } catch (error) {
         console.error('Error fetching menu:', error);
     }
 }
 
+// Add to Cart Functionality
 async function addToCart(item) {
     if (auth.isLoggedIn()) {
         const data = {
             id: item.id,
             name: item.name,
             price: parseFloat(item.price),
-            quantity: 1,  // Assuming quantity is 1 by default
+            quantity: 1,
         };
 
-        // Add item to the local cart (client-side)
         cart.addItem(data);
         const user = JSON.parse(sessionStorage.getItem('user'));
         const userEmail = user.username;
-        // Check if the user has a cart on the server
+
         try {
             const cartResponse = await fetch(`https://casserolecoserver.glitch.me/cart?username=${userEmail}`);
             const existingCart = await cartResponse.json();
 
             if (existingCart && existingCart.length > 0) {
-                // Cart exists, update it
                 const cartId = existingCart[0].id;
-
                 const updateResponse = await fetch(`https://casserolecoserver.glitch.me/cart/${cartId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        id : cartId,
+                        id: cartId,
                         username: userEmail,
-                        order: [...existingCart[0].order, { id: item.id, quantity: 1 }] // Update with new item
+                        order: [...existingCart[0].order, { id: item.id, quantity: 1 }],
                     }),
                 });
 
@@ -241,7 +148,6 @@ async function addToCart(item) {
                     alert('Failed to update the cart. Please try again.');
                 }
             } else {
-                // Cart does not exist, create a new one
                 const createResponse = await fetch('https://casserolecoserver.glitch.me/cart', {
                     method: 'POST',
                     headers: {
@@ -249,8 +155,8 @@ async function addToCart(item) {
                     },
                     body: JSON.stringify({
                         username: userEmail,
-                        order: [{ id: item.id, quantity: 1 }]
-                    })
+                        order: [{ id: item.id, quantity: 1 }],
+                    }),
                 });
 
                 if (createResponse.ok) {
@@ -264,6 +170,6 @@ async function addToCart(item) {
             alert('An error occurred while adding the item to the cart.');
         }
     } else {
-        window.location.href = "login.html";
+        window.location.href = 'login.html';
     }
 }

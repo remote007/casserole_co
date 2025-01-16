@@ -15,3 +15,26 @@
     outline: none;
     border-color: #ff9800;
 }
+
+.search-container {
+    position: relative;
+    width: 100%; /* Adjust width as needed */
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Add padding-right for the icon space */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-icon {
+    position: absolute;
+    right: 0.8rem; /* Adjust this to position the icon inside the input */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: rgba(128, 128, 128, 0.7); /* Greyish transparent color */
+    pointer-events: none; /* Prevent the icon from blocking input clicks */
+}
