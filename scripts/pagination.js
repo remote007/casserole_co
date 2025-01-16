@@ -29,9 +29,10 @@ export function renderPagination(menuItems, currentPage, itemsPerPage, onPageCha
     paginationContainer.appendChild(nextButton);
 
     paginationContainer.style['margin-right'] = '0px';
-        paginationContainer.style['padding-right'] = '0px';
-        paginationContainer.style['text-align'] =  'right';
-        paginationContainer.style['justify-content'] =  'right';
+    paginationContainer.style['padding-right'] = '0px';
+    paginationContainer.style['width'] = '100%';
+    paginationContainer.style['text-align'] =  'right';
+    paginationContainer.style['justify-content'] =  'right';
 
     return paginationContainer;
 }

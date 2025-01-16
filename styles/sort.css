@@ -1,7 +1,7 @@
 .sort-container {
     position: relative;
     display: inline-block;
-    width: 340px; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width as needed */
 }
 
 .sort-dropdown {
@@ -12,7 +12,7 @@
     padding-right: 2.5rem; /* Space for the icon */
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 200px;
+    width: 100%;
     background-color: white;
     font-size: 1rem;
     color: #333;
