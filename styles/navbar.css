@@ -12,7 +12,8 @@
     border-bottom: 4px solid #b97f59; 
     padding-bottom: 30px;
     margin-bottom: 30px;
-
+    height: 100%;
+    width: 100%;
 }
 
 .navbar .logo {
@@ -46,20 +47,23 @@
     list-style: none;
     display: flex;
     flex-direction: row;
+    width: 80%;
+
 }
 
 .navbar .nav-links li {
     align-items: center;
     text-align: center;
     border-radius: 12px;
-    width: 190px;
-    margin-top: 15px;
-    margin-left: 20px;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 7px;
+    margin-right: 7px;
     text-shadow: 
     0 0 7px rgba(233, 187, 4, 0.8), 
     0 0 10px rgba(233, 187, 4, 0.8), 
     0 0 10px rgba(233, 187, 4, 0.8);
-    font-size: 40px;
+    font-size: medium;
 }
 
 #login_btn_id{
@@ -67,12 +71,13 @@
     text-decoration: none;
     font-size: 20px;
     border: none;
-    background: hwb(34 43% 13%);
+    /* background: hwb(34 43% 13%); */
+    background-color: hwb(39 30% 13%);
 }
 
 .navbar .nav-links li a {
     color: #5c4033;
-    font-size: 20px;
+    font-size: small;
     text-decoration: none;
 }
 
