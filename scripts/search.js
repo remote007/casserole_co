@@ -17,7 +17,7 @@ export function createSearchInput(onSearch) {
     icon.classList.add('search-icon');
     
     searchContainer.appendChild(searchInput);
-    searchContainer.style['width'] = '280px';
+    searchContainer.style['width'] = '100%';
     searchContainer.style['margin-left'] = '0px';
     searchContainer.style['padding-left'] = '0px';
     searchContainer.style['margin'] = 'auto';

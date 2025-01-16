@@ -26,7 +26,7 @@ export function createSortDropdown(onSort) {
     sortDropdown.addEventListener('change', () => onSort(sortDropdown.value));
     sortContainer.appendChild(sortDropdown);
 
-    sortContainer.style['width'] = '150px';
+    sortContainer.style['width'] = '100%';
     sortContainer.style['margin'] = 'auto';
     sortContainer.style['text-align'] =  'left';
     sortContainer.style['justify-content'] =  'left';
