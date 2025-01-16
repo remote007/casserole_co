@@ -5,18 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/billing.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
     <link rel="stylesheet" href="./styles/footer.css">
-    <script type="module">
-        import billing from './scripts/billing.js';
-
-        // Initialize the billing page when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            billing.init();  // Initialize the billing page functionality
-        });
-    </script>
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/billing.css">
 </head>
 <body>
     <div class="main-container">
@@ -39,6 +31,14 @@
         <div id="footer-div"></div>
     </div>
     <script src="./scripts/main.js" type="module"></script>
+    <script type="module">
+        import billing from './scripts/billing.js';
+
+        // Initialize the billing page when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            billing.init();  // Initialize the billing page functionality
+        });
+    </script>
     <script src="https://js.stripe.com/v3/"></script>
 </body>
 </html>
