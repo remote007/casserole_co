@@ -24,6 +24,7 @@
     text-align: center;
     margin: auto;
     padding: auto;
+    text-shadow:0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
 }
 
 .navbar .logo a {
@@ -84,4 +85,62 @@
 .navbar .nav-links li:hover {
     color: #4a2207;
     transform: scale(1.15);
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button styling */
+#login_btn_id {
+    background-color: hwb(39 30% 13%);
+    color: #5c4033;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to the dropdown container */
+    background-color: #f9f9f9; /* Background color */
+    min-width: 150px; /* Minimum width of the dropdown */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow */
+    z-index: 1; /* Bring on top */
+    border-radius: 5px; /* Rounded corners */
+    text-align: left;
+    padding: 5px 0;
+    right: 0; /* Align to the right of the button */
+}
+
+/* Show the dropdown when hovering */
+.dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
+
+/* Dropdown items */
+.dropdown-content a {
+    color: #5c4033;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #d99836; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
 }

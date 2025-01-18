@@ -8,6 +8,9 @@ export function loadNavbar() {
         { 
             const navAuthBtn = document.getElementById('login_btn_id');
             navAuthBtn.innerHTML = '<i class="fas fa-user"></i> Logout';
+            const dropdownContent = document.getElementsByClassName('dropdown-content')[0];
+            // const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = 'none';
             navAuthBtn.href = '#';
             navAuthBtn.onclick = (e) => {
                 e.preventDefault();
