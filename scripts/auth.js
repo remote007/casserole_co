@@ -1,37 +1,27 @@
 const API_URL = "https://casserolecoserver.glitch.me/users";
 
 export const auth = {
- isLoggedIn() {
-        return sessionStorage.getItem("user") != null;
-    },
-
-    async getUsername() {
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        return user ? user.username : null;
-    },
-
-    async login(username, password) {
-        const response = await fetch(`${API_URL}?username=${username}`);
+    async login(username, password, authType, empid = '') {
+        const response = await fetch(`${API_URL}/${authType}`);
         const users = await response.json();
 
-        if (users.length == 0) {
-            throw new Error("User not found.");
-        }
+        const user = users.find(
+            (u) => u.username === username && u.password === password && (authType !== 'admin' || u.empid === empid)
+        );
 
-        const user = users.find((u) => u.password == password);
         if (user) {
-            sessionStorage.setItem("user", JSON.stringify(user));
+            sessionStorage.setItem('user', JSON.stringify(user));
             return user;
         } else {
-            throw new Error("Incorrect password.");
+            throw new Error("Invalid credentials.");
         }
     },
 
-    async signup(username, password) {
-        const response = await fetch(API_URL, {
+    async signup(data, authType) {
+        const response = await fetch(`${API_URL}/${authType}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify(data),
         });
 
         if (response.ok) {
@@ -42,6 +32,6 @@ export const auth = {
     },
 
     logout() {
-        sessionStorage.removeItem("user");
-    }
+        sessionStorage.removeItem('user');
+    },
 };

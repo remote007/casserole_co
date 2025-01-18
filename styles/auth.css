@@ -52,6 +52,11 @@
     gap: 15px;
 }
 
+#signup-phone{
+    margin-top: 12px;
+
+}
+
 .auth-section input {
     width: 360px;
     padding: 10px;
