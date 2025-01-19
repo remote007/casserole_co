@@ -40,15 +40,12 @@ const ordersPage = (() => {
     };
 
     const fetchOrders = async () => {
-        const userSession = sessionStorage.getItem('user');
-        if (!userSession) {
+        const useremail = sessionStorage.getItem('user');
+        if (!useremail) {
             alert('You need to log in to view your orders.');
             window.location.href = 'login.html';
             return;
         }
-
-        const user = JSON.parse(userSession);
-        const username = user.username;
 
         try {
             const response = await fetch('https://casserolecoserver.glitch.me/orders');
@@ -58,7 +55,7 @@ const ordersPage = (() => {
 
             const orders = await response.json();
 
-            const userOrders = orders.filter(order => order.username === username);
+            const userOrders = orders.filter(order => order.email === useremail);
 
             if (userOrders.length === 0) {
                 document.getElementById('orders-list').innerHTML = '<p>No orders found.</p>';
