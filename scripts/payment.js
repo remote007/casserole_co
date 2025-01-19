@@ -3,8 +3,8 @@ import cart from './cart.js';
 const orderPayment = (() => {
     // Function to handle payment method selection and actions
     const checkSessionCart = async() => {
-        const userSession = sessionStorage.getItem('user');
-        if (!userSession) {
+        const useremail = sessionStorage.getItem('user');
+        if (!useremail) {
             alert('You need to be logged in to place an order.');
             window.location.href = 'login.html';
             return;
@@ -94,8 +94,7 @@ const orderPayment = (() => {
     const placeOrder = async () => {
         const cartItems = await cart.getItems();
         checkSessionCart();
-        const userSession = sessionStorage.getItem('user');
-        const user = JSON.parse(userSession);
+        const useremail = sessionStorage.getItem('user');
 
         const paymentStatus = sessionStorage.getItem('paymentStatus');
         if (paymentStatus !== 'success') {
@@ -123,7 +122,7 @@ const orderPayment = (() => {
         // Prepare order data
         const order = {
             orderId,
-            username: user.username,
+            email: useremail,
             items: cartItems.map(item => ({
                 id: item.id,
                 name: item.name,
