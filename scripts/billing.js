@@ -142,8 +142,8 @@ const billing = (() => {
 
     const init = async () => {
         // Retrieve user data from sessionStorage
-        const userSession = sessionStorage.getItem('user');
-        if (!userSession) {
+        const useremail = sessionStorage.getItem('user');
+        if (!useremail) {
             alert('Login to view cart is logged in. Redirecting to login.');
             window.location.href = 'login.html';
             return;

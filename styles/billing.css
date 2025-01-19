@@ -1,6 +1,6 @@
 /* Main billing container styling */
 .billing-container {
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: auto;
     padding: 20px;
     background-color: #f8f1e1;
@@ -9,6 +9,7 @@
     box-shadow: 0 8px 20px rgba(185, 127, 89, 0.8), 0 0 25px rgba(185, 127, 89, 0.6); 
     text-align: center;
     box-sizing: border-box; /* Ensure padding doesn't affect width */
+    width: 40%;
 }
 
 /* Cart item row */
@@ -56,7 +57,7 @@
 
 /* Table header row styling */
 .item-row-heading {
-    width: auto; /* Remove fixed width for flexibility */
+    width: 40%; /* Remove fixed width for flexibility */
     background-color: #f8f1e1;
     color: #5c4033;
     text-align: center;
@@ -66,11 +67,12 @@
 
 /* Table data row styling */
 .item-row-data {
-    width: auto; /* Remove fixed width for flexibility */
+    width: 40%; /* Remove fixed width for flexibility */
     background-color: #f8f1e1;;
     color: #5c4033;
     text-align: center;
     padding: 10px;
+    font-size: 1rem;
 }
 
 /* Quantity input box */
