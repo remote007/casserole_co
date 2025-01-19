@@ -25,17 +25,21 @@
                 <div id="login-section" class="auth-section">
                     <h2>Login</h2>
                     <form id="login-form">
-                        <input type="text" id="login-username" class="input_class" placeholder="Username" required>
-                        <input type="password" id="login-password" class="input_class" placeholder="Password" required>
                         <div id="admin-extra-fields" style="display: none;">
-                            <input type="text" id="login-empid" placeholder="Employee ID">
+                            <input type="text" id="login-empid" placeholder="Employee ID" required>
                         </div>
+                        <div id="customer-extra-fields" style="display: none;">
+                            <input type="email" id="login-email" class="input_class" placeholder="Email" required>
+                        </div>
+                        <input type="password" id="login-password" class="input_class" placeholder="Password" required>
                         <button type="submit" class="btn">Login</button>
                     </form>
                     <p class="switch-text">
                         Don't have an account? <span id="show-signup" class="switch-link">Signup</span>
                     </p>
                 </div>
+                
+                
                 <div id="signup-section" class="auth-section" style="display: none;">
                     <h2>Sign Up</h2>
                     <form id="signup-form">
