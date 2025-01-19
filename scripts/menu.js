@@ -112,22 +112,21 @@ export async function loadMenu() {
 
 // Add to Cart Functionality
 async function addToCart(item) {
-    if (auth.isLoggedIn()) {
+    const userEmail = sessionStorage.getItem('user');
+    if (userEmail != null) {
         const data = {
-            id: item.id,
-            name: item.name,
-            price: parseFloat(item.price),
-            quantity: 1,
+            'id': item.id,
+            'name': item.name,
+            'price': parseFloat(item.price),
+            'quantity': 1,
         };
 
         cart.addItem(data);
-        const user = JSON.parse(sessionStorage.getItem('user'));
-        const userEmail = user.username;
 
         try {
-            const cartResponse = await fetch(`https://casserolecoserver.glitch.me/cart?username=${userEmail}`);
+            const cartResponse = await fetch(`https://casserolecoserver.glitch.me/cart?email=${userEmail}`);
             const existingCart = await cartResponse.json();
-
+            console.log(existingCart);
             if (existingCart && existingCart.length > 0) {
                 const cartId = existingCart[0].id;
                 const updateResponse = await fetch(`https://casserolecoserver.glitch.me/cart/${cartId}`, {
@@ -137,7 +136,7 @@ async function addToCart(item) {
                     },
                     body: JSON.stringify({
                         id: cartId,
-                        username: userEmail,
+                        email: userEmail,
                         order: [...existingCart[0].order, { id: item.id, quantity: 1 }],
                     }),
                 });
@@ -154,7 +153,7 @@ async function addToCart(item) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: userEmail,
+                        email: userEmail,
                         order: [{ id: item.id, quantity: 1 }],
                     }),
                 });

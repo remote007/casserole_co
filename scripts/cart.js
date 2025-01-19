@@ -11,17 +11,14 @@ const cart = (() => {
             }
             const carts = await response.json();
 
-            const userSession = sessionStorage.getItem('user');
-            if (!userSession) {
+            const useremail = sessionStorage.getItem('user');
+            if (!useremail) {
                 alert('Login to view cart is logged in.');
                 return [];
             }
 
-            const user = JSON.parse(userSession);
-            const userEmail = user.username;
-
             // Find the cart for the logged-in user
-            const userCart = carts.find(cart => cart.username === userEmail);
+            const userCart = carts.find(cart => cart.email === useremail);
             return userCart ? userCart : null; // Return the entire cart object
         } catch (error) {
             console.error('Error fetching cart:', error);
@@ -32,18 +29,15 @@ const cart = (() => {
     // Save the cart to the server for the logged-in user
     const saveCartToServer = async (cartId, cartItems) => {
         try {
-            const userSession = sessionStorage.getItem('user');
-            if (!userSession) {
+            const useremail = sessionStorage.getItem('user');
+            if (!useremail) {
                 alert('Login to view cart is logged in.');
                 return;
             }
 
-            const user = JSON.parse(userSession);
-            const userEmail = user.username;
-
             const requestData = {
                 id: cartId,
-                username: userEmail,
+                email: useremail,
                 order: cartItems
             };
 
