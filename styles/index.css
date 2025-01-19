@@ -282,12 +282,15 @@
 #intro_div_sec{
     display: grid;
     grid-template-columns: repeat(2,1fr) ;
+    
 }
 
 /* Testimonial Section */
 .testimonials {
-    height: 396px;
-    width: 630px;
+    /* height: 396px;
+    width: 630px; */
+    width: 100%;
+    height: 100%;
     text-align: center;
     padding: 27px;
     background: linear-gradient(to bottom right, #f2dcb7, #d99836);
@@ -306,8 +309,8 @@
 
 .carousel {
     position: relative;
-    overflow: hidden;
-    max-width: 800px;
+    /* width: 100%;
+    height: 100%; */
     margin: 0 auto;
 }
 
@@ -439,12 +442,12 @@
     }
 
     .cta-section h2 {
-        font-size: 1rem;
+        font-size: 1.9rem;
     }
 
     .testimonials {
         width: 100%;
-        height: 100%;
+        height: fit-content;
     }
     .cta-section {
         width: 100%;
@@ -455,14 +458,14 @@
     .cta-content{
         justify-content: center;
         margin: auto;
+        padding-top: 13px;
         text-align: center;
         align-items: center;
-        margin-top: 13%;
         margin-bottom: 15px;
     }
     .btn-cta{
-        height: 55px;
-        width: 210px;
+        height: 45px;
+        width: 201px;
         font-size:medium !important;
         animation: none;
         justify-content: center;
@@ -474,7 +477,7 @@
     }
 }
 
-@media (min-width: 100px) and (max-width: 767px){
+@media screen and (min-width: 100px) and (max-width: 767px){
     .features {
         padding: 0px;
         grid-template-columns: repeat(1,1fr);
@@ -498,32 +501,29 @@
         grid-template-columns: repeat(1,1fr) ;
     }
 
-    .cta-section h2 {
-        font-size: 0.8rem;
-    }
-
     .testimonials {
         width: 100%;
-        height: 100%;
+        height:fit-content;
     }
     .cta-section {
         width: 100%;
         height: 100%;
         margin-bottom: 5px;
         padding-bottom: 5px;
+        margin-top: 5%;
     }
 
     .btn-cta{
         height: 35px;
-        width: 190px;
-        font-size:small !important;
+        width: 185px;
+        font-size:0.8rem !important;
         animation: none;
         justify-content: center;
         margin: auto;
         text-align: center;
         align-items: center;
-        margin-bottom: 5px;
-        padding-bottom: 5px;
+        /* margin-bottom: 5px; */
+        /* padding-bottom: 5px; */
     }
 
     .cta-content{
@@ -531,7 +531,6 @@
         margin: auto;
         text-align: center;
         align-items: center;
-        margin-top: 5%;
         margin-bottom: 5px;
         padding-bottom: 5px;
     }
