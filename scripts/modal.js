@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminExtraFields = document.getElementById('admin-extra-fields');
     const customerExtraFields = document.getElementById('customer-extra-fields');
     const adminExtraSignupFields = document.getElementById('admin-extra-signup-fields');
+    const customerExtraSignupFields = document.getElementById('customer-extra-signup-fields');
 
     // Adjust modal fields based on authType
     if (authType === 'admin') {
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         email.style.display = 'none';
         email.classList.remove('input_class');
         customerExtraFields.style.display = 'none';
+        customerExtraSignupFields.style.display = 'none';
     } else if (authType === 'customer') {
         customerExtraFields.style.display = 'block';
         const empid = document.getElementById('login-empid');
@@ -88,18 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle signup form submission
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const username = document.getElementById('signup-username') ? document.getElementById('signup-username').value:'';
         const email = document.getElementById('signup-email').value;
         const password = document.getElementById('signup-password').value;
         const empId = document.getElementById('signup-empid') ? document.getElementById('signup-empid').value : ''; // Only for admin
-
+        const address = document.getElementById('signup-address') ? document.getElementById('signup-address').value:'';
+        const phone = document.getElementById('signup-phone') ? document.getElementById('signup-phone').value:'';
+        
         const data =
             authType === 'admin'
-                ? { empid: empId, password }
-                : { email, password };
-
+                ? { username:username,empid: empId, password:password }
+                : { username:username,email:email, password:password ,address:address,phone:phone};
+        console.log(data);
         try {
             await auth.signup(data, authType);
-            alert(`Account created for ${authType === 'admin' ? empId : email}!`);
+            alert(`Account created for ${username}!`);
             closeAndRedirect();
         } catch (error) {
             alert(error.message);
