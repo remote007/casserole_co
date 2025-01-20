@@ -41,6 +41,7 @@ const ordersPage = (() => {
 
     const fetchOrders = async () => {
         const useremail = sessionStorage.getItem('user');
+        
         if (!useremail) {
             alert('You need to log in to view your orders.');
             window.location.href = 'login.html';
@@ -49,14 +50,13 @@ const ordersPage = (() => {
 
         try {
             const response = await fetch('https://casserolecoserver.glitch.me/orders');
+            // https://casserolecoserver.glitch.me/orders?email=useremail
             if (!response.ok) {
                 throw new Error('Failed to fetch orders');
             }
 
             const orders = await response.json();
-
             const userOrders = orders.filter(order => order.email === useremail);
-
             if (userOrders.length === 0) {
                 document.getElementById('orders-list').innerHTML = '<p>No orders found.</p>';
                 return;
@@ -213,6 +213,11 @@ const ordersPage = (() => {
 
                 orderDiv.appendChild(itemsHeader);
                 orderDiv.appendChild(itemsList);
+                const ordertotal = document.createElement('h4');
+                ordertotal.style.left = '100%';;
+                ordertotal.textContent = `Total : ${order.total}`;
+
+                orderDiv.appendChild(ordertotal);
 
                 // Append the order div to the orders list container
                 ordersListContainer.appendChild(orderDiv);

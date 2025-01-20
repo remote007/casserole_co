@@ -131,6 +131,7 @@ const orderPayment = (() => {
             })),
             time: new Date().toISOString(),
             delivered: false,
+            total: totalAmount
         };
 
         // Send order to the server
