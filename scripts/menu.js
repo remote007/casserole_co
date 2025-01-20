@@ -5,10 +5,16 @@ import { auth } from './auth.js';
 import cart from './cart.js';
 
 export async function loadMenu() {
+    const userEmail = sessionStorage.getItem('user');
     try {
         const response = await fetch('https://casserolecoserver.glitch.me/menu');
-        let menu = await response.json(); // Full menu data
+        const wishlistResponse = userEmail
+            ? await fetch(`https://casserolecoserver.glitch.me/wishlist?email=${userEmail}`)
+            : { json: () => [] };
+        const wishlist = await wishlistResponse.json();
+        const wishlistIds = wishlist.map(item => item.item_id);
 
+        let menu = await response.json(); // Full menu data
         const contentContainer = document.querySelector('.content');
         contentContainer.innerHTML = ''; // Clear any existing content
 
@@ -37,7 +43,6 @@ export async function loadMenu() {
             renderMenu(filteredMenu, currentPage);
         });
 
-        // Style the control container
         firstContainer.style.display = 'grid';
         firstContainer.style.gridTemplateColumns = 'repeat(3,1fr)';
         firstContainer.style.margin = 'auto';
@@ -49,7 +54,6 @@ export async function loadMenu() {
         grid.classList.add('menu-grid');
         contentContainer.appendChild(grid);
 
-        // Function to render the menu with pagination
         function renderMenu(menuItems, page = 1) {
             grid.innerHTML = ''; // Clear existing menu items
             paginationContainer.innerHTML = ''; // Clear pagination
@@ -58,7 +62,6 @@ export async function loadMenu() {
             const endIndex = page * itemsPerPage;
             const itemsToShow = menuItems.slice(startIndex, endIndex);
 
-            // Render menu items
             itemsToShow.forEach(item => {
                 const card = document.createElement('div');
                 card.classList.add('menu-card');
@@ -77,16 +80,22 @@ export async function loadMenu() {
                 const price = document.createElement('p');
                 price.textContent = `Price: ₹${item.price}`;
 
+                const wishlistIcon = document.createElement('i');
+                wishlistIcon.classList.add('fas', 'fa-heart', 'wishlist-heart');
+                if (wishlistIds.includes(item.id)) {
+                    wishlistIcon.classList.add('active');
+                }
+                wishlistIcon.onclick = () => toggleWishlist(item.id, wishlistIcon);
+
                 const button = document.createElement('button');
                 button.textContent = 'Add to Cart';
                 button.classList.add('add-to-cart-btn');
                 button.onclick = () => addToCart(item);
 
-                card.append(image, title, description, price, button);
+                card.append(image, title, description, price, wishlistIcon, button);
                 grid.appendChild(card);
             });
 
-            // Render pagination
             const pagination = renderPagination(
                 menuItems,
                 page,
@@ -103,14 +112,43 @@ export async function loadMenu() {
         firstContainer.appendChild(searchContainer);
         firstContainer.appendChild(paginationContainer);
 
-        // Initial render
         renderMenu(filteredMenu);
     } catch (error) {
         console.error('Error fetching menu:', error);
     }
 }
 
-// Add to Cart Functionality
+async function toggleWishlist(itemId, heartIcon) {
+    const userEmail = sessionStorage.getItem('user');
+    if (!userEmail) {
+        alert('Please log in to manage your wishlist.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch('https://casserolecoserver.glitch.me/wishlist');
+        const wishlist = await response.json();
+        const wishlistItem = wishlist.find(item => item.item_id === itemId && item.email === userEmail);
+
+        if (wishlistItem) {
+            // Remove from wishlist
+            await fetch(`https://casserolecoserver.glitch.me/wishlist/${wishlistItem.id}`, { method: 'DELETE' });
+            heartIcon.classList.remove('active');
+        } else {
+            // Add to wishlist
+            await fetch('https://casserolecoserver.glitch.me/wishlist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item_id: itemId, email: userEmail }),
+            });
+            heartIcon.classList.add('active');
+        }
+    } catch (error) {
+        console.error('Error managing wishlist:', error);
+    }
+}
+
 async function addToCart(item) {
     const userEmail = sessionStorage.getItem('user');
     if (userEmail != null) {
