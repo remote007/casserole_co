@@ -132,3 +132,20 @@
     padding: 1rem;
     width: 100%;
 }
+
+/* Wishlist Heart Icon */
+.wishlist-heart {
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    margin-right: 10px;
+}
+
+.wishlist-heart.active {
+    color: #e74c3c; /* Red for active heart */
+}
+
+.wishlist-heart:hover {
+    color: #c0392b;
+}
