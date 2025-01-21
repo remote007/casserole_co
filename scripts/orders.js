@@ -1,47 +1,153 @@
 // const ordersPage = (() => {
-//     // Helper function to calculate remaining time
-//     const getRemainingTime = (orderTime) => {
-//         const currentTime = new Date();
-//         const thirtyMinutesAfterOrder = new Date(orderTime.getTime() + 30 * 60 * 1000);
-//         const timeDiff = thirtyMinutesAfterOrder - currentTime;
 
-//         if (timeDiff <= 0) {
-//             return null; // Return null if 30 minutes have passed
-//         }
+//     const deliveryDuration = 60 * 60 * 1000; // 1 hour in milliseconds
 
-//         const minutesRemaining = Math.floor(timeDiff / (1000 * 60));
-//         const secondsRemaining = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-//         return `${minutesRemaining} mins & ${secondsRemaining} secs`;
+//     const calculateRemainingTime = (orderTime) => {
+//         const currentTime = new Date().getTime();
+//         const elapsedTime = currentTime - new Date(orderTime).getTime();
+//         const remainingTime = deliveryDuration - elapsedTime;
+//         return remainingTime > 0 ? remainingTime : 0;
 //     };
 
-//     // Function to update delivery status
 //     const updateDeliveryStatus = async (orderId) => {
 //         try {
 //             const response = await fetch(`https://casserolecoserver.glitch.me/orders/${orderId}`, {
 //                 method: 'PATCH',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     delivered: true,
-//                     status: 'Delivered',
-//                 }),
+//                 headers: { 'Content-Type': 'application/json' },
+//                 body: JSON.stringify({ delivered: true }),
 //             });
-
 //             if (!response.ok) {
 //                 throw new Error('Failed to update delivery status');
 //             }
-
-//             console.log(`Order ID ${orderId} status updated to Delivered.`);
 //         } catch (error) {
 //             console.error('Error updating delivery status:', error);
 //         }
 //     };
 
+//     const createStarRating = (orderId, existingRating) => {
+//         const ratingContainer = document.createElement('div');
+//         ratingContainer.style.display = 'flex';
+//         ratingContainer.style.alignItems = 'center';
+//         ratingContainer.style.justifyContent = 'center';
+//         ratingContainer.style.marginTop = '15px';
+
+//         const stars = [];
+//         for (let i = 1; i <= 5; i++) {
+//             const star = document.createElement('span');
+//             star.textContent = '★';
+//             star.style.cursor =  existingRating ? 'default' : 'pointer';
+//             star.style.fontSize = '24px';
+//             star.style.color = i <= (existingRating || 0) ?'#FFC107' : 'rgba(255, 215, 0, 0.5)'; // Subtle golden glow
+//             star.style.marginRight = '8px';
+//             star.style.transition = 'color 0.3s ease';
+
+//             if (!existingRating) {
+//                 star.addEventListener('click', () => {
+//                     stars.forEach((s, index) => {
+//                         s.style.color = index < i ? '#FFC107' : '#D1B280';
+//                     });
+//                     ratingContainer.dataset.rating = i; // Store rating for submission
+//                 });
+//             }
+
+//             stars.push(star);
+//             ratingContainer.appendChild(star);
+//         }
+//         return ratingContainer;
+//     };
+
+//     const createReviewBox = (orderId, existingReview) => {
+//         const reviewContainer = document.createElement('div');
+//         reviewContainer.style.marginTop = '15px';
+
+//         if (existingReview) {
+//             const reviewText = document.createElement('p');
+//             reviewText.textContent = `Review: ${existingReview}`;
+//             reviewText.style.marginTop = '5px';
+//             reviewText.style.padding = '10px';
+//             reviewText.style.background = 'rgba(245, 229, 209, 0.8)';
+//             reviewText.style.borderRadius = '8px';
+//             reviewText.style.border = '1px solid rgba(225, 202, 171, 0.8)';
+//             reviewText.style.color = '#6C4F3D';
+//             reviewText.style.fontFamily = '"Poppins", sans-serif';
+//             reviewText.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+//             reviewContainer.appendChild(reviewText);
+//         } 
+
+//         else{
+//         const textArea = document.createElement('textarea');
+//         textArea.placeholder = 'Share your experience...';
+//         textArea.style.width = '100%';
+//         textArea.style.height = '100px';
+//         textArea.style.borderRadius = '12px';
+//         textArea.style.border = 'none';
+//         textArea.style.padding = '15px';
+//         textArea.style.background = 'rgba(255, 255, 255, 0.6)'; // Glass-like transparency
+//         textArea.style.backdropFilter = 'blur(8px)';
+//         textArea.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+//         textArea.style.fontFamily = 'Arial, sans-serif';
+//         textArea.style.fontSize = '14px';
+//         textArea.style.marginBottom = '12px';
+//         textArea.style.color = '#3e2723'; // Dark brown
+//         textArea.style.outline = 'none';
+
+//         const submitButton = document.createElement('button');
+//         submitButton.textContent = 'Submit Review';
+//         submitButton.style.padding = '12px 20px';
+//         submitButton.style.borderRadius = '8px';
+//         submitButton.style.border = 'none';
+//         submitButton.style.background = 'rgba(212, 175, 55, 0.85)'; // Golden honey
+//         submitButton.style.color = '#fff';
+//         submitButton.style.cursor = 'pointer';
+//         submitButton.style.fontWeight = 'bold';
+//         submitButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+//         submitButton.style.transition = 'background-color 0.3s ease, box-shadow 0.3s ease';
+        
+//         submitButton.addEventListener('mouseover', () => {
+//             submitButton.style.background = 'rgba(184, 134, 11, 0.9)'; // Deeper golden
+//             submitButton.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.4)';
+//         });
+//         submitButton.addEventListener('mouseout', () => {
+//             submitButton.style.background = 'rgba(212, 175, 55, 0.85)';
+//             submitButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+//         });
+
+//         submitButton.addEventListener('click', async () => {
+//                             const reviewText = textArea.value.trim();
+//                             const rating = reviewContainer.previousElementSibling.dataset.rating;
+            
+//                             if (!rating || !reviewText) {
+//                                 alert('Please provide a rating and review before submitting.');
+//                                 return;
+//                             }
+            
+//                             try {
+//                                 const response = await fetch(`https://casserolecoserver.glitch.me/orders/${orderId}`, {
+//                                     method: 'PATCH',
+//                                     headers: { 'Content-Type': 'application/json' },
+//                                     body: JSON.stringify({ rating: parseInt(rating, 10), review: reviewText }),
+//                                 });
+            
+//                                 if (!response.ok) {
+//                                     throw new Error('Failed to submit review');
+//                                 }
+            
+//                                 alert('Thank you for your review!');
+//                                 location.reload(); // Refresh to display the saved review
+//                             } catch (error) {
+//                                 console.error('Error submitting review:', error);
+//                                 alert('Failed to submit your review. Please try again later.');
+//                             }
+//                         });
+
+//         reviewContainer.appendChild(textArea);
+//         reviewContainer.appendChild(submitButton);
+//     }
+//         return reviewContainer;
+//     };
+
 //     const fetchOrders = async () => {
 //         const useremail = sessionStorage.getItem('user');
-        
 //         if (!useremail) {
 //             alert('You need to log in to view your orders.');
 //             window.location.href = 'login.html';
@@ -50,182 +156,101 @@
 
 //         try {
 //             const response = await fetch('https://casserolecoserver.glitch.me/orders');
-//             // https://casserolecoserver.glitch.me/orders?email=useremail
 //             if (!response.ok) {
 //                 throw new Error('Failed to fetch orders');
 //             }
 
 //             const orders = await response.json();
 //             const userOrders = orders.filter(order => order.email === useremail);
-//             if (userOrders.length === 0) {
-//                 document.getElementById('orders-list').innerHTML = '<p>No orders found.</p>';
-//                 return;
-//             }
-
+//             const ordersContainer = document.getElementsByClassName('orders-container')[0];
+//             ordersContainer.innerHTML = '';
 //             userOrders.sort((a, b) => new Date(b.time) - new Date(a.time));
-
-//             const ordersListContainer = document.getElementById('orders-list');
-//             ordersListContainer.innerHTML = ''; // Clear previous orders
-
 //             userOrders.forEach(order => {
 //                 const orderDiv = document.createElement('div');
-//                 orderDiv.classList.add('order-item');
-//                 orderDiv.style.border = '1px solid #ddd';
-//                 orderDiv.style.borderRadius = '8px';
-//                 orderDiv.style.padding = '16px';
-//                 orderDiv.style.marginBottom = '16px';
-//                 orderDiv.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+//                 orderDiv.style.borderRadius = '15px';
+//                 orderDiv.style.margin = "auto";
+//                 orderDiv.style.padding = '20px';
+//                 orderDiv.style.marginBottom = '20px';
+//                 orderDiv.style.background = 'rgba(255, 255, 255, 0.5)'; // Glass-like effect
+//                 orderDiv.style.backdropFilter = 'blur(10px)';
+//                 orderDiv.style.boxShadow = '0 8px 16px rgba(188, 166, 2, 0.93)';
+//                 orderDiv.style.fontFamily = 'Arial, sans-serif';
+//                 orderDiv.style.color = 'black'; // Dark brown
+//                 orderDiv.style.transition = 'transform 0.2s ease';
+//                 orderDiv.style.width = "70%";
 
-//                 const orderTime = new Date(order.time);
-//                 const deliveredTime = order.delivered ? 'Delivered' : 'Pending';
-//                 const remainingTime = getRemainingTime(orderTime);
+//                 orderDiv.addEventListener('mouseover', () => {
+//                     orderDiv.style.transform = 'scale(1.02)';
+//                 });
+//                 orderDiv.addEventListener('mouseout', () => {
+//                     orderDiv.style.transform = 'scale(1)';
+//                 });
 
-//                 // Order Header
+//                 // Order details
 //                 const orderHeader = document.createElement('h3');
 //                 orderHeader.textContent = `Order ID: ${order.id}`;
-//                 orderHeader.style.marginBottom = '8px';
-//                 orderHeader.style.color = '#333';
+//                 orderHeader.style.marginBottom = '12px';
+//                 orderHeader.style.color = '#black'; // Deeper golden
 
 //                 const orderDate = document.createElement('p');
-//                 orderDate.textContent = `Placed on: ${orderTime.toLocaleString()}`;
-//                 orderDate.style.color = '#555';
-//                 orderDate.style.fontSize = '14px';
-//                 orderDate.style.marginBottom = '8px';
+//                 orderDate.textContent = `Placed on: ${new Date(order.time).toLocaleString()}`;
+//                 orderDate.style.marginBottom = '12px';
+
+//                 const remainingTime = calculateRemainingTime(order.time);
+//                 const timeText = remainingTime > 0
+//                     ? `Time Remaining: ${Math.ceil(remainingTime / 60000)} mins`
+//                     : -1;
+
+//                 const timeRemaining = document.createElement('p');
+//                 timeRemaining.textContent = timeText;
+//                 timeRemaining.style.color = remainingTime > 0 ? 'darkbrown' : 'red';
+//                 timeRemaining.style.marginBottom = '12px';
 
 //                 const orderStatus = document.createElement('p');
-//                 orderStatus.textContent = `Status: ${deliveredTime}`;
-//                 orderStatus.style.color = order.delivered ? 'green' : 'orange';
-//                 orderStatus.style.fontWeight = 'bold';
-//                 orderStatus.style.marginBottom = '8px';
+//                 orderStatus.textContent = `Status: ${order.delivered ? 'Delivered' : 'Pending'}`;
+//                 orderStatus.style.color = order.delivered ? 'dark-green' : 'red'; // Delivered green, pending burnt orange
+//                 orderStatus.style.marginBottom = '12px';
 
-//                 orderDiv.appendChild(orderHeader);
-//                 orderDiv.appendChild(orderDate);
-//                 orderDiv.appendChild(orderStatus);
-
-//                 // Remaining time with sand timer animation
-//                 if (!order.delivered && remainingTime) {
-//                     const timerContainer = document.createElement('div');
-//                     timerContainer.style.display = 'flex';
-//                     timerContainer.style.alignItems = 'center';
-//                     timerContainer.style.marginTop = '8px';
-
-//                     // Sand timer container
-//                     const sandTimer = document.createElement('div');
-//                     sandTimer.style.width = '40px';
-//                     sandTimer.style.height = '60px';
-//                     sandTimer.style.position = 'relative';
-//                     sandTimer.style.border = '2px solid #000';
-//                     sandTimer.style.borderRadius = '8px';
-//                     sandTimer.style.marginRight = '12px';
-//                     sandTimer.style.overflow = 'hidden';
-
-//                     // Top sand
-//                     const topSand = document.createElement('div');
-//                     topSand.style.width = '100%';
-//                     topSand.style.height = '50%';
-//                     topSand.style.backgroundColor = '#ffb74d';
-//                     topSand.style.position = 'absolute';
-//                     topSand.style.top = '0';
-//                     topSand.style.transition = 'height 1s linear';
-
-//                     // Falling sand animation
-//                     const fallingSand = document.createElement('div');
-//                     fallingSand.style.width = '10px';
-//                     fallingSand.style.height = '10px';
-//                     fallingSand.style.backgroundColor = '#ffb74d';
-//                     fallingSand.style.position = 'absolute';
-//                     fallingSand.style.top = '50%';
-//                     fallingSand.style.left = '50%';
-//                     fallingSand.style.transform = 'translate(-50%, -50%)';
-//                     fallingSand.style.animation = 'falling 1s infinite linear';
-
-//                     // Bottom sand
-//                     const bottomSand = document.createElement('div');
-//                     bottomSand.style.width = '100%';
-//                     bottomSand.style.height = '0';
-//                     bottomSand.style.backgroundColor = '#ffb74d';
-//                     bottomSand.style.position = 'absolute';
-//                     bottomSand.style.bottom = '0';
-//                     bottomSand.style.transition = 'height 1s linear';
-
-//                     sandTimer.appendChild(topSand);
-//                     sandTimer.appendChild(fallingSand);
-//                     sandTimer.appendChild(bottomSand);
-
-//                     // Remaining time text
-//                     const remainingTimeText = document.createElement('span');
-//                     remainingTimeText.textContent = remainingTime;
-//                     remainingTimeText.style.color = '#ff5722';
-//                     remainingTimeText.style.fontWeight = 'bold';
-
-//                     timerContainer.appendChild(sandTimer);
-//                     timerContainer.appendChild(remainingTimeText);
-
-//                     orderDiv.appendChild(timerContainer);
-
-//                     // Update the sand timer and remaining time every second
-//                     const intervalId = setInterval(() => {
-//                         const updatedRemainingTime = getRemainingTime(orderTime);
-//                         if (updatedRemainingTime) {
-//                             remainingTimeText.textContent = updatedRemainingTime;
-
-//                             // Simulate sand movement
-//                             const totalSeconds = 30 * 60;
-//                             const elapsedSeconds =
-//                                 (new Date().getTime() - orderTime.getTime()) / 1000;
-//                             const topSandHeight = Math.max(
-//                                 0,
-//                                 50 - (50 * elapsedSeconds) / totalSeconds
-//                             );
-//                             const bottomSandHeight = Math.min(
-//                                 50,
-//                                 (50 * elapsedSeconds) / totalSeconds
-//                             );
-
-//                             topSand.style.height = `${topSandHeight}%`;
-//                             bottomSand.style.height = `${bottomSandHeight}%`;
-//                         } else {
-//                             remainingTimeText.textContent = 'Delivered';
-//                             sandTimer.style.display = 'none';
-//                             clearInterval(intervalId);
-//                         }
-//                     }, 1000);
+//                 if (!order.delivered && remainingTime <= 0) {
+//                     orderStatus.textContent = 'Status: Delivered';
+//                     orderStatus.style.color = '#3c763d';
+//                     updateDeliveryStatus(order.id);
 //                 }
 
 //                 // Items list
-//                 const itemsHeader = document.createElement('h4');
-//                 itemsHeader.textContent = 'Items:';
-//                 itemsHeader.style.marginBottom = '8px';
-//                 itemsHeader.style.color = '#444';
-
 //                 const itemsList = document.createElement('ul');
 //                 itemsList.style.listStyleType = 'none';
 //                 itemsList.style.padding = '0';
-//                 itemsList.style.margin = '0';
-
 //                 order.items.forEach(item => {
 //                     const itemLi = document.createElement('li');
-//                     itemLi.textContent = `${item.name} (x${item.quantity}) - ₹ ${(item.price * item.quantity).toFixed(2)}`;
-//                     itemLi.style.marginBottom = '4px';
-//                     itemLi.style.color = '#555';
+//                     itemLi.textContent = `${item.name} (x${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}`;
+//                     itemLi.style.marginBottom = '6px';
 //                     itemsList.appendChild(itemLi);
 //                 });
 
-//                 orderDiv.appendChild(itemsHeader);
+//                 const orderTotal = document.createElement('h4');
+//                 orderTotal.textContent = `Total: ₹${order.total}`;
+//                 orderTotal.style.marginTop = '10px';
+
+//                 // Append elements to the orderDiv
+//                 orderDiv.appendChild(orderHeader);
+//                 orderDiv.appendChild(orderDate);
+//                 timeText==-1?timeRemaining.style.display="none":orderDiv.appendChild(timeRemaining);
+//                 orderDiv.appendChild(orderStatus)
+//                 orderDiv.appendChild(orderStatus);
 //                 orderDiv.appendChild(itemsList);
-//                 const ordertotal = document.createElement('h4');
-//                 ordertotal.style.left = '100%';;
-//                 ordertotal.textContent = `Total : ${order.total}`;
+//                 orderDiv.appendChild(orderTotal);
 
-//                 orderDiv.appendChild(ordertotal);
-
-//                 // Append the order div to the orders list container
-//                 ordersListContainer.appendChild(orderDiv);
-
-//                 // Check if 30 minutes have passed
-//                 if (!order.delivered && new Date() - orderTime >= 30 * 60 * 1000) {
-//                     updateDeliveryStatus(order.id);
+//                 // Add rating and review if delivered
+//                 if (order.delivered) {
+//                     const rating = createStarRating(order.id, order.rating);
+//                     const reviewBox = createReviewBox(order.id, order.review);
+//                     orderDiv.appendChild(rating);
+//                     orderDiv.appendChild(reviewBox);
 //                 }
+
+//                 // Append orderDiv to ordersContainer
+//                 ordersContainer.appendChild(orderDiv);
 //             });
 //         } catch (error) {
 //             console.error('Error fetching orders:', error);
@@ -236,7 +261,7 @@
 //     const init = async () => {
 //         const userSession = sessionStorage.getItem('user');
 //         if (!userSession) {
-//             alert('You need to log in to view your orders. Redirecting to login.');
+//             alert('You need to log in to view your orders.');
 //             window.location.href = 'login.html';
 //             return;
 //         }
@@ -251,30 +276,55 @@
 // ordersPage.init();
 
 const ordersPage = (() => {
-    const createStarRating = (orderId) => {
+    const deliveryDuration = 30 * 60 * 1000; // 1 hour in milliseconds
+
+    const calculateRemainingTime = (orderTime) => {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - new Date(orderTime).getTime();
+        const remainingTime = deliveryDuration - elapsedTime;
+        return remainingTime > 0 ? remainingTime : 0;
+    };
+
+    const updateDeliveryStatus = async (orderId) => {
+        try {
+            const response = await fetch(`https://casserolecoserver.glitch.me/orders/${orderId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ delivered: true }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update delivery status');
+            }
+        } catch (error) {
+            console.error('Error updating delivery status:', error);
+        }
+    };
+
+    const createStarRating = (orderId, existingRating) => {
         const ratingContainer = document.createElement('div');
         ratingContainer.style.display = 'flex';
         ratingContainer.style.alignItems = 'center';
-        ratingContainer.style.marginTop = '10px';
+        ratingContainer.style.justifyContent = 'center';
+        ratingContainer.style.marginTop = '15px';
 
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             const star = document.createElement('span');
             star.textContent = '★';
-            star.style.cursor = 'pointer';
-            star.style.fontSize = '20px';
-            star.style.color = 'gray';
-            star.style.marginRight = '5px';
+            star.style.cursor = existingRating ? 'default' : 'pointer';
+            star.style.fontSize = '24px';
+            star.style.color = i <= (existingRating || 0) ? '#FFC107' : 'rgba(255, 215, 0, 0.5)';
+            star.style.marginRight = '8px';
+            star.style.transition = 'color 0.3s ease';
 
-            star.addEventListener('click', () => {
-                // Highlight stars up to clicked one
-                stars.forEach((s, index) => {
-                    s.style.color = index < i ? 'gold' : 'gray';
+            if (!existingRating) {
+                star.addEventListener('click', () => {
+                    stars.forEach((s, index) => {
+                        s.style.color = index < i ? '#FFC107' : '#D1B280';
+                    });
+                    ratingContainer.dataset.rating = i; // Store rating for submission
                 });
-
-                // Store rating in sessionStorage or API call
-                sessionStorage.setItem(`rating-${orderId}`, i);
-            });
+            }
 
             stars.push(star);
             ratingContainer.appendChild(star);
@@ -282,42 +332,203 @@ const ordersPage = (() => {
         return ratingContainer;
     };
 
-    const createReviewBox = (orderId) => {
+    const createReviewBox = (orderId, existingReview) => {
         const reviewContainer = document.createElement('div');
-        reviewContainer.style.marginTop = '10px';
+        reviewContainer.style.marginTop = '15px';
 
-        const textArea = document.createElement('textarea');
-        textArea.placeholder = 'Write your review here...';
-        textArea.style.width = '100%';
-        textArea.style.height = '80px';
-        textArea.style.borderRadius = '5px';
-        textArea.style.border = '1px solid #ccc';
-        textArea.style.padding = '10px';
-        textArea.style.marginBottom = '10px';
+        if (existingReview) {
+            const reviewText = document.createElement('p');
+            reviewText.textContent = `Review: ${existingReview}`;
+            reviewText.style.marginTop = '5px';
+            reviewText.style.padding = '10px';
+            reviewText.style.background = 'rgba(245, 229, 209, 0.8)';
+            reviewText.style.borderRadius = '8px';
+            reviewText.style.border = '1px solid rgba(225, 202, 171, 0.8)';
+            reviewText.style.color = '#6C4F3D';
+            reviewText.style.fontFamily = '"Poppins", sans-serif';
+            reviewText.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+            reviewContainer.appendChild(reviewText);
+        } else {
+            const textArea = document.createElement('textarea');
+            textArea.placeholder = 'Share your experience...';
+            textArea.style.width = '100%';
+            textArea.style.height = '100px';
+            textArea.style.borderRadius = '12px';
+            textArea.style.border = 'none';
+            textArea.style.padding = '15px';
+            textArea.style.background = 'rgba(255, 255, 255, 0.6)'; // Glass-like transparency
+            textArea.style.backdropFilter = 'blur(8px)';
+            textArea.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            textArea.style.fontFamily = 'Arial, sans-serif';
+            textArea.style.fontSize = '14px';
+            textArea.style.marginBottom = '12px';
+            textArea.style.color = '#3e2723'; // Dark brown
+            textArea.style.outline = 'none';
 
-        const submitButton = document.createElement('button');
-        submitButton.textContent = 'Submit Review';
-        submitButton.style.padding = '10px 20px';
-        submitButton.style.borderRadius = '5px';
-        submitButton.style.border = 'none';
-        submitButton.style.backgroundColor = '#28a745';
-        submitButton.style.color = 'white';
-        submitButton.style.cursor = 'pointer';
+            const submitButton = document.createElement('button');
+            submitButton.textContent = 'Submit Review';
+            submitButton.style.padding = '12px 20px';
+            submitButton.style.borderRadius = '8px';
+            submitButton.style.border = 'none';
+            submitButton.style.background = 'rgba(212, 175, 55, 0.85)'; // Golden honey
+            submitButton.style.color = '#fff';
+            submitButton.style.cursor = 'pointer';
+            submitButton.style.fontWeight = 'bold';
+            submitButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            submitButton.style.transition = 'background-color 0.3s ease, box-shadow 0.3s ease';
 
-        submitButton.addEventListener('click', () => {
-            const reviewText = textArea.value.trim();
-            if (reviewText) {
-                alert(`Review for Order ${orderId}: ${reviewText}`);
-                sessionStorage.setItem(`review-${orderId}`, reviewText);
-                textArea.value = '';
-            } else {
-                alert('Please write a review before submitting.');
+            submitButton.addEventListener('mouseover', () => {
+                submitButton.style.background = 'rgba(184, 134, 11, 0.9)'; // Deeper golden
+                submitButton.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.4)';
+            });
+            submitButton.addEventListener('mouseout', () => {
+                submitButton.style.background = 'rgba(212, 175, 55, 0.85)';
+                submitButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            });
+
+            submitButton.addEventListener('click', async () => {
+                const reviewText = textArea.value.trim();
+                const rating = reviewContainer.previousElementSibling.dataset.rating;
+
+                if (!rating || !reviewText) {
+                    alert('Please provide a rating and review before submitting.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`https://casserolecoserver.glitch.me/orders/${orderId}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ rating: parseInt(rating, 10), review: reviewText }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to submit review');
+                    }
+
+                    alert('Thank you for your review!');
+                    location.reload(); // Refresh to display the saved review
+                } catch (error) {
+                    console.error('Error submitting review:', error);
+                    alert('Failed to submit your review. Please try again later.');
+                }
+            });
+
+            reviewContainer.appendChild(textArea);
+            reviewContainer.appendChild(submitButton);
+        }
+        return reviewContainer;
+    };
+
+    const displayOrders = (userOrders) => {
+        const ordersContainer = document.getElementsByClassName('orders-container')[0];
+        ordersContainer.innerHTML = '';
+
+        if (userOrders.length === 0) {
+            ordersContainer.textContent = 'No orders found.';
+            return;
+        }
+
+        ordersContainer.style.width= "800px";
+
+        // Create main card and slider
+        const mainCardContainer = document.createElement('div');
+        const sliderContainer = document.createElement('div');
+
+        mainCardContainer.style.marginBottom = '20px';
+        sliderContainer.style.display = 'flex';
+        sliderContainer.style.overflowX = 'scroll';
+        sliderContainer.style.gap = '15px';
+        sliderContainer.style.width= "100%";
+
+        const createOrderCard = (order, isMain = false) => {
+            const orderDiv = document.createElement('div');
+            orderDiv.style.borderRadius = '15px';
+            orderDiv.style.margin = isMain ? '0 auto 20px auto' : '0';
+            orderDiv.style.padding = '20px';
+            orderDiv.style.background = 'rgba(255, 255, 255, 0.5)'; // Glass-like effect
+            orderDiv.style.backdropFilter = 'blur(10px)';
+            orderDiv.style.boxShadow = '0 8px 16px rgba(188, 166, 2, 0.93)';
+            orderDiv.style.fontFamily = 'Arial, sans-serif';
+            orderDiv.style.color = 'black'; // Dark brown
+            orderDiv.style.transition = 'transform 0.2s ease';
+            orderDiv.style.width = isMain ? '70%' : '450px';
+            orderDiv.style.height = !isMain ? '260px' : '50%';
+            orderDiv.style.cursor = isMain ? 'default' : 'pointer';
+
+            orderDiv.addEventListener('mouseover', () => {
+                if (!isMain) orderDiv.style.transform = 'scale(1.05)';
+            });
+            orderDiv.addEventListener('mouseout', () => {
+                if (!isMain) orderDiv.style.transform = 'scale(1)';
+            });
+
+            const orderHeader = document.createElement('h3');
+            orderHeader.textContent = `Order ID: ${order.id}`;
+            orderHeader.style.marginBottom = '12px';
+
+            const orderDate = document.createElement('p');
+            orderDate.textContent = `${new Date(order.time).toLocaleString()}`;
+            orderDate.style.marginBottom = '12px';
+
+            const remainingTime = calculateRemainingTime(order.time);
+            const timeText = remainingTime > 0
+                ? `Time Remaining: ${Math.ceil(remainingTime / 60000)} mins`
+                : -1;
+
+            const timeRemaining = document.createElement('p');
+            timeRemaining.textContent = timeText;
+            timeRemaining.style.color = remainingTime > 0 ? 'darkbrown' : 'red';
+            timeRemaining.style.marginBottom = '12px';
+
+            const orderStatus = document.createElement('p');
+            orderStatus.textContent = `Status: ${order.delivered ? 'Delivered' : "On it's way"}`;
+            orderStatus.style.color = order.delivered ? 'green' : 'red'; // Delivered green, pending burnt orange
+            orderStatus.style.marginBottom = '12px';
+
+            if (!order.delivered && remainingTime <= 0) {
+                orderStatus.textContent = 'Status: Delivered';
+                orderStatus.style.color = '#3c763d';
+                updateDeliveryStatus(order.id);
             }
+
+            const orderTotal = document.createElement('h4');
+            orderTotal.textContent = `Total: ₹${order.total}`;
+
+            orderDiv.appendChild(orderHeader);
+            orderDiv.appendChild(orderDate);
+            if(isMain)
+            {timeText==-1?timeRemaining.style.display="none":orderDiv.appendChild(timeRemaining);
+            orderDiv.appendChild(orderStatus);}
+
+            if (order.delivered && isMain) {
+                const rating = createStarRating(order.id, order.rating);
+                const reviewBox = createReviewBox(order.id, order.review);
+                orderDiv.appendChild(rating);
+                orderDiv.appendChild(reviewBox);
+            }
+            orderDiv.appendChild(orderTotal);
+            orderDiv.addEventListener('click', () => {
+                if (!isMain) {
+                    mainCardContainer.innerHTML = '';
+                    const mainCard = createOrderCard(order, true);
+                    mainCardContainer.appendChild(mainCard);
+                }
+            });
+
+            return orderDiv;
+        };
+
+        const mainCard = createOrderCard(userOrders[0], true);
+        mainCardContainer.appendChild(mainCard);
+
+        userOrders.forEach((order) => {
+            const card = createOrderCard(order);
+            sliderContainer.appendChild(card);
         });
 
-        reviewContainer.appendChild(textArea);
-        reviewContainer.appendChild(submitButton);
-        return reviewContainer;
+        ordersContainer.appendChild(mainCardContainer);
+        ordersContainer.appendChild(sliderContainer);
     };
 
     const fetchOrders = async () => {
@@ -335,66 +546,9 @@ const ordersPage = (() => {
             }
 
             const orders = await response.json();
-            const userOrders = orders.filter(order => order.email === useremail);
-            console.log(userOrders);
-            const ordersContainer = document.getElementsByClassName('orders-container')[0];
-            ordersContainer.innerHTML = '';
-
-            userOrders.forEach(order => {
-                const orderDiv = document.createElement('div');
-                orderDiv.style.border = '1px solid #ddd';
-                orderDiv.style.borderRadius = '8px';
-                orderDiv.style.padding = '16px';
-                orderDiv.style.marginBottom = '16px';
-                orderDiv.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-
-                // Order details
-                const orderHeader = document.createElement('h3');
-                orderHeader.textContent = `Order ID: ${order.id}`;
-                orderHeader.style.marginBottom = '8px';
-
-                const orderDate = document.createElement('p');
-                orderDate.textContent = `Placed on: ${new Date(order.time).toLocaleString()}`;
-                orderDate.style.marginBottom = '8px';
-
-                const orderStatus = document.createElement('p');
-                orderStatus.textContent = `Status: ${order.delivered ? 'Delivered' : 'Pending'}`;
-                orderStatus.style.color = order.delivered ? 'green' : 'orange';
-                orderStatus.style.marginBottom = '8px';
-
-                // Items list
-                const itemsList = document.createElement('ul');
-                itemsList.style.listStyleType = 'none';
-                itemsList.style.padding = '0';
-                order.items.forEach(item => {
-                    const itemLi = document.createElement('li');
-                    itemLi.textContent = `${item.name} (x${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}`;
-                    itemLi.style.marginBottom = '4px';
-                    itemsList.appendChild(itemLi);
-                });
-
-                const orderTotal = document.createElement('h4');
-                orderTotal.textContent = `Total: ₹${order.total}`;
-                orderTotal.style.marginTop = '10px';
-
-                // Append elements to the orderDiv
-                orderDiv.appendChild(orderHeader);
-                orderDiv.appendChild(orderDate);
-                orderDiv.appendChild(orderStatus);
-                orderDiv.appendChild(itemsList);
-                orderDiv.appendChild(orderTotal);
-
-                // Add rating and review if delivered
-                if (order.delivered) {
-                    const rating = createStarRating(order.id);
-                    const reviewBox = createReviewBox(order.id);
-                    orderDiv.appendChild(rating);
-                    orderDiv.appendChild(reviewBox);
-                }
-
-                // Append orderDiv to ordersContainer
-                ordersContainer.appendChild(orderDiv);
-            });
+            const userOrders = orders.filter((order) => order.email === useremail);
+            userOrders.sort((a, b) => new Date(b.time) - new Date(a.time));
+            displayOrders(userOrders);
         } catch (error) {
             console.error('Error fetching orders:', error);
             alert('Could not fetch your orders. Please try again later.');
@@ -416,5 +570,5 @@ const ordersPage = (() => {
     };
 })();
 
-// Initialize orders page
 ordersPage.init();
+

@@ -113,6 +113,7 @@ const orderPayment = (() => {
 
             const orders = await ordersResponse.json();
             orderId = orders.length + 1; // Set the orderId
+            console.log(orders)
         } catch (error) {
             console.error('Error fetching existing orders:', error);
             alert('Could not fetch the current orders. Please try again later.');
@@ -131,9 +132,11 @@ const orderPayment = (() => {
             })),
             time: new Date().toISOString(),
             delivered: false,
-            total: totalAmount
+            total: totalAmount,
+            rating: null,
+            review: null
         };
-
+        console.log(order);
         // Send order to the server
         try {
             const response = await fetch('https://casserolecoserver.glitch.me/orders', {
@@ -144,7 +147,11 @@ const orderPayment = (() => {
                 body: JSON.stringify(order),
             });
 
-            if (!response.ok) throw new Error('Failed to place the order.');
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error placing order:', errorText);
+                throw new Error('Failed to place the order.');
+            }
 
             alert('Order placed successfully!');
             await cart.clear(); // Clear the cart after successful order
