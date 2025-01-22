@@ -58,7 +58,7 @@ const billing = (() => {
     //     const userSession = sessionStorage.getItem('user');
     //     if (!userSession) {
     //         alert('You need to be logged in to place an order.');
-    //         window.location.href = 'login.html';
+    //         window.location.href = 'login.html?authType=customer';
     //         return;
     //     }
 
@@ -145,7 +145,7 @@ const billing = (() => {
         const useremail = sessionStorage.getItem('user');
         if (!useremail) {
             alert('Login to view cart is logged in. Redirecting to login.');
-            window.location.href = 'login.html';
+            window.location.href = 'login.html?authType=customer';
             return;
         }
 

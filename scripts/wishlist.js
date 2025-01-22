@@ -8,7 +8,7 @@ export async function loadWishlist() {
     const userEmail = sessionStorage.getItem('user');
     if (!userEmail) {
         alert('Please log in to view your wishlist.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html?authType=customer';
         return;
     }
     
@@ -66,7 +66,7 @@ async function removeFromWishlist(id) {
     const userEmail = sessionStorage.getItem('user');
     if (!userEmail) {
         alert('Please log in to remove items from your wishlist.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html?authType=customer';
         return;
     }
 
@@ -96,7 +96,7 @@ async function moveToCart(id) {
     const email = sessionStorage.getItem('user');
     if (!email) {
         alert('Please log in to add items to your cart.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html?authType=customer';
         return;
     }
 
