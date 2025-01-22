@@ -150,7 +150,7 @@
 //         const useremail = sessionStorage.getItem('user');
 //         if (!useremail) {
 //             alert('You need to log in to view your orders.');
-//             window.location.href = 'login.html';
+//             window.location.href = 'login.html?authType=customer';
 //             return;
 //         }
 
@@ -262,7 +262,7 @@
 //         const userSession = sessionStorage.getItem('user');
 //         if (!userSession) {
 //             alert('You need to log in to view your orders.');
-//             window.location.href = 'login.html';
+//             window.location.href = 'login.html?authType=customer';
 //             return;
 //         }
 //         await fetchOrders();
@@ -535,7 +535,7 @@ const ordersPage = (() => {
         const useremail = sessionStorage.getItem('user');
         if (!useremail) {
             alert('You need to log in to view your orders.');
-            window.location.href = 'login.html';
+            window.location.href = 'login.html?authType=customer';
             return;
         }
 
@@ -559,7 +559,7 @@ const ordersPage = (() => {
         const userSession = sessionStorage.getItem('user');
         if (!userSession) {
             alert('You need to log in to view your orders.');
-            window.location.href = 'login.html';
+            window.location.href = 'login.html?authType=customer';
             return;
         }
         await fetchOrders();

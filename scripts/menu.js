@@ -122,7 +122,7 @@ async function toggleWishlist(itemId, heartIcon) {
     const userEmail = sessionStorage.getItem('user');
     if (!userEmail) {
         alert('Please log in to manage your wishlist.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html?authType=customer';
         return;
     }
 
@@ -207,6 +207,6 @@ async function addToCart(item) {
             alert('An error occurred while adding the item to the cart.');
         }
     } else {
-        window.location.href = 'login.html';
+        window.location.href = 'login.html?authType=customer';
     }
 }
