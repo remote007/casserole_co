@@ -6,7 +6,7 @@ const orderPayment = (() => {
         const useremail = sessionStorage.getItem('user');
         if (!useremail) {
             alert('You need to be logged in to place an order.');
-            window.location.href = 'login.html';
+            window.location.href = 'login.html?authType=customer';
             return;
         }
 
